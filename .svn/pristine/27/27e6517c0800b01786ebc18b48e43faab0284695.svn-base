@@ -1,0 +1,7 @@
+/* Safari 9.0+ (iOS Only) */
+
+@supports (-webkit-text-size-adjust:none) and (not (-ms-accelerator:true)){
+  .appbar-title {
+    margin-left: -0.2em;
+  }
+}
