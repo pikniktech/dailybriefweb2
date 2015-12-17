@@ -38,6 +38,7 @@ class Article extends MY_Controller {
 	{
 		$this->inapp = @($_GET['inapp']==1);
 		$this->load->model("Article_model");
+		
 		$article_result = $this->Article_model->get_detail($article_id, true);
 		
 		$startup = $this->startup();

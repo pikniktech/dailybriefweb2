@@ -5,7 +5,7 @@ class Home extends MY_Controller {
 	public function index()
 	{
 		$this->load->model("Article_model");
-		$article_result = $this->Article_model->get_landing_list();
+		$article_result = $this->Article_model->get_list();
 	
 		$article_list = array();
 		foreach($article_result->results as $artobj)

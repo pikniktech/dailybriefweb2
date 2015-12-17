@@ -43,7 +43,7 @@ $route['404_override'] = '';
 $route['article/slider'] = 'article/frame/slider';
 $route['article/scratch_card'] = 'article/frame/scratch_card';
 
-$route['(:any)/(:any)'] = 'article/view/$1/$2';
+$route['article/(:any)/(:any)'] = 'article/view/$1/$2';
 $route['(:any)'] = '$1';
 
 

@@ -2,7 +2,7 @@
 
 class Article_model extends My_Model {
 
-	function get_landing_list()
+	function get_list()
 	{
 		$service_url = $this->config->item('api_server') . "/prod/list";
 		
