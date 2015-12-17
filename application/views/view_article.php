@@ -8,159 +8,31 @@
   <div id="image-carousel" class="dragdealer">
     <div class="handle">
       <div class="article-body">
-        <div class="section-block orange">
-          <div>What's Trending</div>
+<?php if ($category) : ?>
+        <div class="section-block orange" style="background: <?=$category['topbar_color'];?>">
+          <div><?=$category['name'];?></div>
         </div>
+<?php endif; ?>
+<?php if ($featured_video || $featured_image) : ?>
         <div class="article-visual">
-          <img u=image src="/assets/images/article_01.jpg" class="visual-image" />
+		<?php if ($featured_video) : ?>
+          	<img u=image src="<?=$featured_video;?>" class="visual-image" />
+		<?php elseif ($featured_image) : ?>
+          	<img u=image src="<?=$featured_image;?>" class="visual-image" />
+		<?php endif; ?>
         </div>
+<?php endif; ?>
         <div class="article-content">
-          <h2>我諗每個男人心裡面都有一個黃翠如</h2>
-          <span class="article-info">8:35am 2015年11月20日<br>Yahoo新聞</span>
-          <p>「我諗每個男人心裡面都有一個黃翠如
-有啲男人頭，有啲亂黎，你同佢好Friend
-會一齊食飯 一齊宵夜 一齊去旅行
-但係永遠唔會撻著
-
-「你同佢好似總係有啲莫名嘅共鳴
-人哋永遠會以為你哋係一對
-但你心裡面知道根本無可能
-當朋友問到
-你通常都答：X，係有D好感，但係當佢係friend嚟0架咋。
-
-「但係問心
-你係有少少鍾意佢
-但你亦知道
-佢係完全唔鍾意你
-
-「你哋都好享受呢種感覺
-一種好似男女朋友咁親密 但係完全無男女朋友責任嘅感覺
-
-「直到一日黃翠如同蕭正楠喺埋一齊
-你會發覺：『X！原來我好鍾意黃翠如呢條八婆』
-
-「但係好可惜你已經失去左一百次同黃翠如一齊嘅機會
-你只好係成班friend面前繼續同黃翠如扮好朋友
-得閒串下佢，佢得閒，佢得閒又會串番下你
-但係你兩個都知 其實有啲嘢係唔同咗
-
-難得有一次工作上嘅機會
-你可以再同黃翠如手拖手。。。
-
-隔咗一兩日
-你睇番報紙
-見到張相
-你微笑
-你流淚 。」</p>
+		<h2><?=@$article['data']['article.title']['value'][0]['text'];?></h2>
+		<span class="article-info"><?php echo $pub_date;?></span>	
+		<?=@$article_content; ?>
           <div class="article-tag">
-            <span><a href="">娛樂</a></span><span><a href="">人氣熱選</a></span>
+<?php foreach ($article['tags'] as $tag) : ?>
+	<span><a href="/tags/<?=$tag;?>"><?=$tag;?></a></span>
+<?php endforeach; ?>
           </div>
         </div>
       </div>
-	  <!--
-      <div class="article-body">
-        <div class="section-block orange">
-          <div>What's Trending</div>
-        </div>
-        <div class="article-visual">
-          <img u=image src="assets/images/article_01.jpg" class="visual-image" />
-        </div>
-        <div class="article-content">
-          <h2>我諗每個男人心裡面都有一個黃翠如</h2>
-          <span class="article-info">8:35am 2015年11月20日<br>Yahoo新聞</span>
-          <p>「我諗每個男人心裡面都有一個黃翠如
-有啲男人頭，有啲亂黎，你同佢好Friend
-會一齊食飯 一齊宵夜 一齊去旅行
-但係永遠唔會撻著
-
-「你同佢好似總係有啲莫名嘅共鳴
-人哋永遠會以為你哋係一對
-但你心裡面知道根本無可能
-當朋友問到
-你通常都答：X，係有D好感，但係當佢係friend嚟0架咋。
-
-「但係問心
-你係有少少鍾意佢
-但你亦知道
-佢係完全唔鍾意你
-
-「你哋都好享受呢種感覺
-一種好似男女朋友咁親密 但係完全無男女朋友責任嘅感覺
-
-「直到一日黃翠如同蕭正楠喺埋一齊
-你會發覺：『X！原來我好鍾意黃翠如呢條八婆』
-
-「但係好可惜你已經失去左一百次同黃翠如一齊嘅機會
-你只好係成班friend面前繼續同黃翠如扮好朋友
-得閒串下佢，佢得閒，佢得閒又會串番下你
-但係你兩個都知 其實有啲嘢係唔同咗
-
-難得有一次工作上嘅機會
-你可以再同黃翠如手拖手。。。
-
-隔咗一兩日
-你睇番報紙
-見到張相
-你微笑
-你流淚 。」</p>
-          <div class="article-tag">
-            <span><a href="">娛樂</a></span><span><a href="">人氣熱選</a></span>
-          </div>
-        </div>
-      </div>
-	  
-      <div class="article-body">
-        <div class="section-block orange">
-          <div>What's Trending</div>
-        </div>
-        <div class="article-visual">
-          <img u=image src="assets/images/article_01.jpg" class="visual-image" />
-        </div>
-        <div class="article-content">
-          <h2>我諗每個男人心裡面都有一個黃翠如</h2>
-          <span class="article-info">8:35am 2015年11月20日<br>Yahoo新聞</span>
-          <p>「我諗每個男人心裡面都有一個黃翠如
-有啲男人頭，有啲亂黎，你同佢好Friend
-會一齊食飯 一齊宵夜 一齊去旅行
-但係永遠唔會撻著
-
-「你同佢好似總係有啲莫名嘅共鳴
-人哋永遠會以為你哋係一對
-但你心裡面知道根本無可能
-當朋友問到
-你通常都答：X，係有D好感，但係當佢係friend嚟0架咋。
-
-「但係問心
-你係有少少鍾意佢
-但你亦知道
-佢係完全唔鍾意你
-
-「你哋都好享受呢種感覺
-一種好似男女朋友咁親密 但係完全無男女朋友責任嘅感覺
-
-「直到一日黃翠如同蕭正楠喺埋一齊
-你會發覺：『X！原來我好鍾意黃翠如呢條八婆』
-
-「但係好可惜你已經失去左一百次同黃翠如一齊嘅機會
-你只好係成班friend面前繼續同黃翠如扮好朋友
-得閒串下佢，佢得閒，佢得閒又會串番下你
-但係你兩個都知 其實有啲嘢係唔同咗
-
-難得有一次工作上嘅機會
-你可以再同黃翠如手拖手。。。
-
-隔咗一兩日
-你睇番報紙
-見到張相
-你微笑
-你流淚 。」</p>
-          <div class="article-tag">
-            <span><a href="">娛樂</a></span><span><a href="">人氣熱選</a></span>
-          </div>
-        </div>
-      </div>
-	  -->
-	  
     </div>
   </div>
   <div class="btn-home orange">
@@ -233,15 +105,16 @@
   <!-- Main Nav End -->
 </div>
 <script>
-jQuery(function($) {
 
+jQuery(function($) {
+if (typeof Dragdealer != "undefined") {
   new Dragdealer('image-carousel', {
     steps: 3,
     speed: 0.3,
     loose: true,
     requestAnimationFrame: true
   });
-
+}
   var $scroller = $(".article-body");
   $scroller.bind('touchstart', function (ev) {
       var $this = $(this);

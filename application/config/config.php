@@ -234,8 +234,10 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
-
+//$config['encryption_key'] = 'HEv!P^c58@LWjTr7G!e_32G8gaK8gBd_#K5SQCJBGj8$uKkWN=5m44Ms+HedJYANEseFQ2$azC!q5kGmkfWq?AU$f-Rsy-g6Y#LD^?d=DQgK53Z3*&yg8bB@gwqQ*uH^2bk*?!5L7GfJSarx6%HmDr&WnDEu9JHPmTYQw7Kj!aE2vm586$UJWGF9&rnCb8hvn-s7u^FqGE+7u!Vc22X^*Vm^CGArpVtHv4^^MKmqAGMHrM2HeBZYU^4kCvGxruP#';
+//$config['encryption_key'] = '';//'HEv!P^c58@LWjTr7G!e_32G8gaK8gBd_#K5SQCJBGj8$uKkWN=5m';
+// 44Ms+HedJYANEseFQ2$azC!q5kGmkfWq?AU$f-Rsy-g6Y#LD^?d=DQgK53Z3*&yg8bB@gwqQ*uH^2bk*?!5L7GfJSarx6%HmDr&WnDEu9JHPmTYQw7Kj!aE2vm586$UJWGF9&rnCb8hvn-s7u^FqGE+7u!Vc22X^*Vm^CGArpVtHv4^^MKmqAGMHrM2HeBZYU^4kCvGxruP#';
+$config['encryption_key'] = '1234briefdaily0987';
 /*
 |--------------------------------------------------------------------------
 | Session Variables
@@ -367,6 +369,13 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+
+
+$config['redis'] = array(
+	"scheme" => "tcp",
+	"host" => "localhost", // dev redist endpoint "dev-cache.2m2of6.0001.apne1.cache.amazonaws.com",
+	"port" => 6379
+);
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
