@@ -1,15 +1,81 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+#require "predis/autoload.php";
+require APPPATH.'libraries/predis/autoload.php';
+# PredisAutoloader::register();
+Predis\Autoloader::register();	
+
 class MY_Controller extends CI_Controller
 {
+	protected $canonical = '',
+		  $inapp = false,
+		  $cache_server = null;
+
+	protected function connect_cache() {
+		if ($this->cache_server == null) {
+			try {
+				$client = $this->cache_server = new Predis\Client($this->config->item("redis"));
+			} catch (Predis\Connection\ConnectionException $exception) {
+			}
+		}
+	}
+	
+	protected function set_cache($k, $v) {
+		if ($this->cache_server == null)
+			$this->connect_cache();
+		return $this->cache_server->set($k, $v);
+	}
+
+	protected function get_cache($k) {
+		if ($this->cache_server == null) 
+			$this->connect_cache();
+		return $this->cache_server->get($k);
+	}
+
+	protected function debug($o, $exit=true) {
+		echo '<pre>'; print_r($o); echo '</pre>';
+		if ($exit) exit();
+	}	
+
+	// generate article url
+	protected function article_url($id, $slug) {
+		return join('/', array($id, $slug));
+	}
+
+	// lookup category object in startup by slug
+	protected function category_lookup($categories, $category) {
+		$_category = null;
+		foreach ($categories as $cat) :
+			if ($cat['slug'] == $category) :
+				$_category = $cat;
+				break;
+			endif;
+		endforeach;
+		return $_category;
+	}
+
+	// need to cache 
+	protected function startup() {
+		$data = $this->get_cache('startup');
+		if (empty($data) || $this->input->get('gencache') == 'startup') :
+			$service_url = $this->config->item('api_server') . "/prod/startup";
+			$json_content = file_get_contents($service_url);
+			$json = json_decode($json_content, true);		
+			$this->set_cache('startup', serialize($json['response']));
+			return (array)$json['response'];
+		else:
+			return unserialize($data);
+		endif;
+	}
+
 	protected function load_view($master_view_name, $view_data)
 	{
 		//$view_data['language'] = $this->language;
 
 		//$view_data['error_list'] = $this->error_messages;
 		//$view_data['message_list'] = $this->system_messages;
-
+		$view_data['canonical'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 		if($master_view_name == "")
 			$this->load->view($view_data['partial_view'], $view_data);
