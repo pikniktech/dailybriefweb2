@@ -249,6 +249,9 @@ jQuery(function($) {
 	$('.main-nav-item').click(function(){
 	  var callPanelID = $(this).attr('id');
 	  $('.news-feed.'+callPanelID).removeClass('hide');
+	  
+	  if(callPanelID == "traffic")
+		  window.location = "/traffic";
 	});
   
   

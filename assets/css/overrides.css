@@ -560,7 +560,7 @@ input#pac_input:not(:valid) ~ .close-search-icon {
 input#message_input {
   border: 0;
   line-height: 36px;
-  width: 17em;
+  width: 75%;
   float: left;
   position: relative;
   padding-left: 3em;
@@ -568,7 +568,7 @@ input#message_input {
 button.send-message {
     float: right;
     position: relative;
-    width: 5em;
+    width: 20%;
     height: 100%;
     border: 0;
     background-color: rgb(255, 212, 0);
@@ -646,6 +646,10 @@ div.live-traffic-body {
   display: block;
   margin: 0 1.2em;
 }
+.recent-locations {
+    width: 80%;
+    margin: 0 auto;
+}
 .live-traffic-body h2 {
   text-align: center;
   text-transform: uppercase;
@@ -654,6 +658,7 @@ div.live-traffic-body {
   font-size: 1.2em;
   letter-spacing: 0.2em;
   margin-top: 0;
+  margin-bottom: 0;
 }
 .traffic-options {
     background-color: white;
@@ -677,6 +682,10 @@ div.live-traffic-body {
   -moz-appearance: none;
   appearance: none;
       font-size: 1.1em;
+      outline: none;
+}
+.traffic-options select:focus {
+    outline: none;
 }
 .traffic-options i {
     position: absolute;
@@ -695,8 +704,11 @@ div.live-traffic-body {
     text-shadow: 1px 1px black;
     font-size: 1.2em;
 }
+.live-traffic-video {
+  text-align: center;
+}
 .live-traffic-video img {
-    width:100%;
+    width:70%;
     height:auto;
 }
 .cameras-location {
@@ -717,6 +729,7 @@ div.live-traffic-body {
     height: 100%;
     z-index: 0;
     opacity: 0.3;
+	background-size: cover;
 }
 .cameras-location > div {
     text-align: center;
