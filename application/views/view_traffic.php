@@ -46,104 +46,43 @@
   <div class="btn-home orange traffic">
 	<i class="fa fa-home"></i>
   </div>
-  <!-- Newd Feed Start -->
-  <div class="news-feed sports">
-	<div class="floater sports"></div>
-	<div class="news-feed-body sports">
-	<ul class="news-feed sports">
-	  <li class="news-feed-title">Sports <i class="fa fa-cross"></i></li>
-	  <li><a href="">0:0 逼和國足「美妙一夜」全城力撐 港足守出奇蹟</a></li>
-	  <li><a href="">NBA 東岸列強「站起來」</a></li>
-	  <li><a href="">喬帥擒費爸 年終賽4連霸封王</a></li>
-	</ul>
-  </div>
-	<div class="btn-menu-out bounce sports">
-	  <i class="fa fa-angle-up"></i>
-	</div>
-  </div>
-  <!-- Newd Feed End -->
   <div class="live-traffic hide">
-	<div class="live-traffic-body">
-	  <h2>Select Your Location</h2>
-	  <div class="traffic-options district">
-		<label for="traffic-district">地區</label>
-		<i class="fa fa-angle-down"></i>
-		<select name="traffic-district">
-		  <option value='' selected>請選擇地區</option>
-		  <?php foreach($district_list as $district){?>
-		  <option value="<?php echo $district?>"><?php echo $district?></option>
-		  <?php } ?>
-		</select>
-	  </div>
-	  <div class="traffic-options place">
-		<label for="traffic-place">地點</label>
-		<i class="fa fa-angle-down"></i>
-		<select name="traffic-place">
-		  <option  value='' selected>請選擇地點</option>
-		</select>
-	  </div>
-	  <div class="live-traffic-video">
-		<div class="live-ltraffic-ocation">Loading...</div>
-		<img id="mainCamImage" src="./assets/images/H207F.JPG">
-	  </div>
-	  <div class="recent-locations">
-		<h2>Recent Location</h2>
-		<div class="mui-row nomargin" id="recentCamContainer">
+  	<div class="live-traffic-body">
+  	  <h2>Select Your Location</h2>
+  	  <div class="traffic-options district">
+  		<label for="traffic-district">地區</label>
+  		<i class="fa fa-angle-down"></i>
+  		<select name="traffic-district">
+  		  <option value='' selected>請選擇地區</option>
+  		  <?php foreach($district_list as $district){?>
+  		  <option value="<?php echo $district?>"><?php echo $district?></option>
+  		  <?php } ?>
+  		</select>
+  	  </div>
+  	  <div class="traffic-options place">
+  		<label for="traffic-place">地點</label>
+  		<i class="fa fa-angle-down"></i>
+  		<select name="traffic-place">
+  		  <option  value='' selected>請選擇地點</option>
+  		</select>
+  	  </div>
+  	  <div class="live-traffic-video">
+  		<div class="live-ltraffic-ocation">Loading...</div>
+  		<img id="mainCamImage" src="./assets/images/H207F.JPG">
+  	  </div>
+  	  <div class="recent-locations">
+    		<h2>Recent Location</h2>
+    		<div class="mui-row nomargin" id="recentCamContainer">
 
-		</div>
-	  </div>
-	  <div class="btn-menu-out bounce traffic">
-		<i class="fa fa-angle-up"></i>
-	  </div>
+    		</div>
+  	  </div>
+    </div>
+    <div class="btn-menu-out bounce traffic">
+    <i class="fa fa-angle-up"></i>
+    </div>
   </div>
   <!-- Main Nav Start -->
-  <div class="main-nav">
-	<div class="floater home"></div>
-	<div class="main-nav-body">
-	  <div class="mui-row">
-		<h2>MENU</h2>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-01" id="trending">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-02" id="weather">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-03" id="traffic">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-04" id="business">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-05" id="food">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-06" id="technology">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-07" id="sports">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-08" id="workplace">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-09" id="pets">
-		  </div>
-		</div>
-	  </div>
-	</div>
-	<div class="btn-menu-out bounce home">
-	  <i class="fa fa-angle-up"></i>
-	</div>
-  </div>
+  <?php $this->load->view("view_main_menu");?>
   <!-- Main Nav End -->
 </div>
 
@@ -355,88 +294,6 @@ jQuery(function($) {
 
   disableScroll();
 
-  //Buttons
-  $('.btn-home').on('click', function() {
-	$('.main-nav').removeClass('hide');
-  });
-  $('.btn-menu-out.home').on('click', function() {
-	$('.main-nav').addClass('hide');
-  });
-  $('.btn-menu-out.sports').on('click', function() {
-	$('.news-feed').addClass('hide');
-  });
-  $('.close-search-icon').on('click', function(){
-	var text = '';
-	$('.search-box').attr('value', text);
-  })
-  $('.btn-menu-out.traffic').on('click', function() {
-	$('.live-traffic').addClass('hide');
-  });
-
-  $('.fa-video-camera').on('click', function(){
-	$('.live-traffic').removeClass('hide');
-  });
-
-  $('div.app-bar-icon.left').click(function(){
-	window.location = "/";
-  });
-
-  // Main Nav - Responsive Part
-	var $window = $(window).on('resize', function(){
-	$('#googleMap').height($(window).height());
-	$('.section-traffic').height($(window).height());
-
-	var $mainNavItem = $('.main-nav-item');
-	var $floaterHome = $('.floater.home');
-	var $mainNavBody = $('.main-nav-body .mui-row');
-		var orgHeight = $mainNavItem.width();
-	$mainNavItem.css({"height":orgHeight+"px"});
-	var contentHeight = $mainNavBody.height();
-	var floaterHomeMargin = -(contentHeight/2);
-		$floaterHome.css({"margin-bottom":floaterHomeMargin+"px"});
-		$mainNavBody.css({"height":contentHeight+"px"});
-
-	var $floaterSports = $('.floater.sports');
-	var $sportsBody = $('ul.news-feed.sports');
-	var $newsFeedBody = $('div.news-feed-body.sports');
-	var newsSportHeight = $sportsBody.height();
-	var floaterSportsMargin = -(newsSportHeight/2);
-	$floaterSports.css({"margin-bottom":floaterSportsMargin+"px"});
-	$newsFeedBody.css({"height":newsSportHeight+"px"});
-
-  var $trafficBody = $('.live-traffic-body');
-  $trafficBody.height($(window).height());
-	var $liveTrafficVideo = $('.live-traffic-video img');
-	var cameraHeight = $liveTrafficVideo.height();
-	$('.live-traffic-video').height(cameraHeight);
-	var $orgTrafficHeight = $('.recent-locations div div.mui-col-xs-4');
-	var $camerasLocation = $('.cameras-location');
-	var orgTrafficHeight = $orgTrafficHeight.width();
-	$camerasLocation.height(orgTrafficHeight);
-
-  var locationPicHeight = $('.location-pic').width();
-  $('.location-pic').height(locationPicHeight);
-
-	var orgplaceText = $('.placeText').height();
-	var locationCenterText = (orgTrafficHeight - orgplaceText)/2;
-	$('.placeText').css({"padding-top":locationCenterText+"px"});
-
-	}).trigger('resize');
-
-  $('.main-nav-item').click(function(){
-	  var callPanelID = $(this).attr('id');
-	  $('.news-feed.'+callPanelID).removeClass('hide');
-  });
-
-  $("select[name=traffic-district]").change(function(){
-	  refreshPlaceList();
-  });
-
-  $("select[name=traffic-place]").change(function(){
-	  updateCam();
-  });
-
-
   //schedule update the cam image
   setInterval(function(){
 	  var imgsrc = $("#mainCamImage").attr('src');
@@ -471,6 +328,58 @@ jQuery(function($) {
 			}
 		}
 	}
+
+  //Buttons for Traffic
+  $('.close-search-icon').on('click', function(){
+	var text = '';
+	$('.search-box').attr('value', text);
+  })
+  $('.btn-menu-out.traffic').on('click', function() {
+	$('.live-traffic').addClass('hide');
+  });
+
+  $('.fa-video-camera').on('click', function(){
+	$('.live-traffic').removeClass('hide');
+  });
+
+  $('div.app-bar-icon.left').click(function(){
+	window.location = "/";
+  });
+
+  // Responsive Part
+	var $window = $(window).on('resize', function(){
+	$('#googleMap').height($(window).height());
+	$('.section-traffic').height($(window).height());
+
+  // Traffic Overlay
+  var $trafficBody = $('.live-traffic-body');
+  $trafficBody.height($(window).height());
+	var $liveTrafficVideo = $('.live-traffic-video img');
+	var cameraHeight = $liveTrafficVideo.height();
+	$('.live-traffic-video').height(cameraHeight);
+	var $orgTrafficHeight = $('.recent-locations div div.mui-col-xs-4');
+	var $camerasLocation = $('.cameras-location');
+	var orgTrafficHeight = $orgTrafficHeight.width();
+	$camerasLocation.height(orgTrafficHeight);
+
+  // Traffic Overlay - Location Pic & Text
+  var locationPicHeight = $('.location-pic').width();
+  $('.location-pic').height(locationPicHeight);
+
+	var orgplaceText = $('.placeText').height();
+	var locationCenterText = (orgTrafficHeight - orgplaceText)/2;
+	$('.placeText').css({"padding-top":locationCenterText+"px"});
+
+	}).trigger('resize');
+
+  $("select[name=traffic-district]").change(function(){
+	  refreshPlaceList();
+  });
+
+  $("select[name=traffic-place]").change(function(){
+	  updateCam();
+  });
+
 });
 
 </script>

@@ -45,9 +45,18 @@
 	  <i class="fa fa-angle-up"></i>
 	</div>
   </div>
-  
+
 <script>
 jQuery(function($) {
+
+  //Buttons
+  $('.btn-home').on('click', function() {
+    $('.main-nav').removeClass('hide');
+  });
+  $('.btn-menu-out.home').on('click', function() {
+    $('.main-nav').addClass('hide');
+  });
+
 	// Main Nav - Responsive Part
 	var $window = $(window).on('resize', function(){
 	var $mainNavItem = $('.main-nav-item');
@@ -67,12 +76,18 @@ jQuery(function($) {
 	var floaterSportsMargin = -(newsSportHeight/2);
 	$floaterSports.css({"margin-bottom":floaterSportsMargin+"px"});
 	$newsFeedBody.css({"height":newsSportHeight+"px"});
+
+  // Back Arrow Position
+  var btnMenuOutWidth = $('.btn-menu-out').width();
+  var btnMenuOutMargin = ($('.main-nav').width() - btnMenuOutWidth) / 2;
+  $('.btn-menu-out').css({"left":btnMenuOutMargin+"px"});
+
 	}).trigger('resize');
 
 	$('.main-nav-item').click(function(){
 	  var callPanelID = $(this).attr('id');
 	  $('.news-feed.'+callPanelID).removeClass('hide');
-	  
+
 	  if(callPanelID == "traffic")
 		  window.location = "/traffic";
 	});

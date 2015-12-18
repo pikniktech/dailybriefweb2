@@ -45,22 +45,6 @@
   <div class="btn-home orange">
 	<i class="fa fa-home"></i>
   </div>
-  <!-- Newd Feed Start -->
-  <div class="news-feed sports">
-	<div class="floater sports"></div>
-	<div class="news-feed-body sports">
-	<ul class="news-feed sports">
-	  <li class="news-feed-title">Sports <i class="fa fa-cross"></i></li>
-	  <li><a href="">0:0 逼和國足「美妙一夜」全城力撐 港足守出奇蹟</a></li>
-	  <li><a href="">NBA 東岸列強「站起來」</a></li>
-	  <li><a href="">喬帥擒費爸 年終賽4連霸封王</a></li>
-	</ul>
-  </div>
-	<div class="btn-menu-out bounce sports">
-	  <i class="fa fa-angle-up"></i>
-	</div>
-  </div>
-  <!-- Newd Feed End -->
   <!-- Main Nav Start -->
   <?php $this->load->view("view_main_menu");?>
 </div>
@@ -111,7 +95,7 @@ jQuery(function($) {
 			window.location = "/article/" + artdiv.data("id") + "/" + artdiv.data("slug");
 		}
 	});
-	
+
 	//responsive code begin
 	//you can remove responsive code if you don't want the slider to scale along with window
 	function ScaleSlider() {
@@ -167,21 +151,6 @@ jQuery(function($) {
 	}
 
 	disableScroll();
-
-	//Buttons
-	$('.btn-home').on('click', function() {
-		$('.main-nav').removeClass('hide');
-	});
-	$('.btn-menu-out.home').on('click', function() {
-		$('.main-nav').addClass('hide');
-	});
-	$('.btn-menu-out.sports').on('click', function() {
-		$('.news-feed').addClass('hide');
-	});
-
-
-  
-  
 });
 
 
