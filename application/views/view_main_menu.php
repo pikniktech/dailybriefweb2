@@ -90,6 +90,8 @@ jQuery(function($) {
 
 	  if(callPanelID == "traffic")
 		  window.location = "/traffic";
+	  else
+		  window.location = "/";
 	});
 });
 </script>
