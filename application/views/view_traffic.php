@@ -97,8 +97,8 @@
 <script type="text/javascript">
 
 var PUBNUB_traffic = PUBNUB.init({
-	publish_key: 'pub-c-e57702fe-3dfd-4002-9887-31a1a0b07c23',
-	subscribe_key: 'sub-c-c6921f0a-a492-11e5-9937-02ee2ddab7fe'
+	publish_key: '<?=$this->config->item('pubnub_publish_key')?>',
+	subscribe_key: '<?=$this->config->item('pubnub_subscribe_key')?>'
 });
 
 // Subscribe to the channel
