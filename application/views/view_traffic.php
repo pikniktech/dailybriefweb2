@@ -20,19 +20,12 @@
 	<div class="message-group">
 	  <div class="message-body">
 		<!-- Message Start -->
-		<div class="message-detail">
-		  <div class="profile-pic">
-			<img src="./assets/images/profile_pic_demo.jpg">
-		  </div>
-		  <div class="message-content">
-			<p><span>08:28</span>Happens everyday...</p>
-		  </div>
-		</div>
+
 	  </div>
 	</div>
 	  <div class="message-panel">
 		<div class="message-box">
-		  <i class="fa fa-smile-o"></i>
+		  <i class="fa fa-comment-o"></i>
 		  <input id="message_input" class="message-box" type="text" placeholder="Type a message">
 		  <button class="send-message" type="button">Send</button>
 		</div>
@@ -95,6 +88,37 @@
   </div>
 </div>
 
+
+
+<!-- Include the PubNub Library -->
+<script src="https://cdn.pubnub.com/pubnub-dev.js"></script>
+
+<!-- Instantiate PubNub -->
+<script type="text/javascript">
+
+var PUBNUB_traffic = PUBNUB.init({
+	publish_key: 'pub-c-e57702fe-3dfd-4002-9887-31a1a0b07c23',
+	subscribe_key: 'sub-c-c6921f0a-a492-11e5-9937-02ee2ddab7fe'
+});
+
+// Subscribe to the channel
+PUBNUB_traffic.subscribe({
+    channel: 'traffic',
+    message: function(m){
+		//console.log(m)
+		var d = new Date();
+		var cur_time = formatDate(d, "hh:mm");
+		var $newMessage = '<div class="message-detail" style="opacity:0"><div class="profile-pic"><img src="./assets/images/profile_pic_demo.jpg"></div><div class="message-content"><p><span>' + cur_time + '</span>' + m.text + '</p></div></div>';
+		$('.message-body').append($newMessage);
+		$('.message-detail').last().animate({
+		  opacity: 1
+		}, 500, function(){
+		});
+	}
+});
+
+</script>
+
 <script>
 
 
@@ -112,11 +136,12 @@ $('#message_input').on('focus', function () { window.scrollTo(0, 0) })
 
 //Message Animation
 $('.send-message').click(function() {
-	var $newMessage = '<div class="message-detail" style="opacity:0"><div class="profile-pic"><img src="./assets/images/profile_pic_demo.jpg"></div><div class="message-content"><p><span>08:28</span>Happens everyday...</p></div></div>';
-	$('.message-body').append($newMessage);
-	$('.message-detail').last().animate({
-	  opacity: 1
-	}, 500, function(){
+	var msg = $("#message_input").val();
+	$("#message_input").val('');
+	
+	PUBNUB_traffic.publish({
+		channel: 'traffic',
+		message: {"text": msg}
 	});
 });
 
@@ -177,7 +202,6 @@ function setCamByPos(pos)
 		url: url,
 		dataType: "json",
 	}).done(function(response){
-		//console.log(response);
 		$("select[name=traffic-district]").val(response.data.district);
 		refreshPlaceList();
 		$("select[name=traffic-place]").val(response.data.name);
@@ -307,9 +331,6 @@ jQuery(function($) {
 	var cam_history_array = [];
 	if(cam_history != null && cam_history != "")
 		cam_history_array = cam_history.split(",");
-
-
-	console.log(cam_history_array);
 
 	//recentCamContainer
 	//tplCamHistoryItem
