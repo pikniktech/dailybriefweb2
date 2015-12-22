@@ -324,3 +324,5 @@ buttons {
   -moz-transition: -moz-transform 0.3s 0.7s, opacity 0s 0.7s;
   transition: transform 0.3s 0.7s, opacity 0s 0.7s;
 }
+
+.fb-post, .fb-post iframe, .fb-post span { width: 100% !important; }

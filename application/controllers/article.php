@@ -5,7 +5,8 @@ class Article extends MY_Controller {
 	private $_article = null;
 
 	private $scratch_card_counter = 0,
-		$slider_counter = 0;	
+		$slider_counter = 0,
+		$preview = false;	
 
 	public function frame($type) {
 		$index = (int)$this->input->get('index');
@@ -34,12 +35,23 @@ class Article extends MY_Controller {
 		}
 	}
 
+	public function preview($article_id) {
+		$this->preview = true;
+		$this->view($article_id, '');
+	}
+
 	public function view($article_id, $title)
 	{
 		$this->inapp = @($_GET['inapp']==1);
 		$this->load->model("Article_model");
-		$article_result = $this->Article_model->get_detail($article_id, true);
+
+		$article_result = $this->Article_model->get_detail($article_id, true, $this->preview);
 		
+		if ($this->preview && $article_result)
+			$article_result = array(
+				'results' => array($article_result)
+			);	
+
 		$startup = $this->startup();
 
 		if(count($article_result['results']) == 0)
@@ -51,7 +63,7 @@ class Article extends MY_Controller {
 		$this->_article = (array)$article_result['results'][0];
 		$this->session->set_userdata('current_article', serialize(array(
 			'id' => $this->_article['id'],
-			'article.title' => $this->_article['data']['article.title'],
+			'article.title' => @$this->_article['data']['article.title'],
 			'article.sliders' => @$this->_article['data']['article.sliders'],
 			'article.scratchcards' => @$this->_article['data']['article.scratchcards'],
 		)));
@@ -101,12 +113,15 @@ class Article extends MY_Controller {
 				break;
 			case 'scratch_card':
 				$scratch_card = $this->_article['data']['article.scratchcards']['value'][$this->scratch_card_counter];
-				$_rendered_content .= $this->load->view('widgets/view_scratch_card', array('index' => $this->scratch_card_counter, 'scratch_card' => $scratch_card), true);	
+				if ($scratch_card)
+					$_rendered_content .= $this->load->view('widgets/view_scratch_card', array('index' => $this->scratch_card_counter, 'scratch_card' => $scratch_card), true);	
 				$this->scratch_card_counter++;
 			break;
 			case 'slider':
-				$slider = $this->_article['data']['article.sliders']['value'][$this->slider_counter];
-				$_rendered_content .= $this->load->view('widgets/view_slider', array('index' => $this->slider_counter, 'slider' => $slider), true);	
+				$slider = @$this->_article['data']['article.sliders']['value'][$this->slider_counter];
+				if ($slider) 
+					$_rendered_content .= $this->load->view('widgets/view_slider', array('index' => $this->slider_counter, 'slider' => $slider), true);	
+				
 				$this->slider_counter++;
 			break;
 			default: 
@@ -143,7 +158,8 @@ class Article extends MY_Controller {
 			endforeach;
 			return str_replace($replace, $placement, $text);
 		else:	
-			return $block['text'];
+			return preg_replace('/data-width="[0-9]+"/', 'data-width="100%"', $block['text']);
+			//return $block['text'];
 		endif;
 	}
 	

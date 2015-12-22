@@ -9,8 +9,8 @@
 	</style>
 </head>
 <body>
-	<?php if ($type == 'slider') : 	?>
-        <figure class="cd-image-container">
+	<?php if ($type == 'slider' && $slider) : ?>
+        <figure class="cd-image-container" data-height="<?=min($slider['beforeimg']['value']['main']['dimensions']['height'], $slider['afterimg']['value']['main']['dimensions']['height']);?>">
             <img src="<?=$slider['beforeimg']['value']['main']['url'];?>" alt="" class="slider-after-img">
             <span class="cd-image-label" data-type="original"></span>
             <div class="cd-resize-img"><img src="<?=$slider['afterimg']['value']['main']['url'];?>" alt="" class="slider-before-img">
@@ -19,7 +19,9 @@
             <span class="cd-handle"></span>
         </figure>
 	<?php elseif ($type == 'scratch_card') : ?>
-	<div data-bimg="<?=$scratch_card['frontimg']['value']['main']['url'];?>" data-fimg="<?=$scratch_card['backimage']['value']['main']['url'];?>" id="scratchpad-<?=$index;?>" class="scratchpad"></div>
+	<figure data-height="<?=@$scratch_card['frontimg']['value']['main']['dimensions']['height'];?>">
+	<div data-bimg="<?=@$scratch_card['frontimg']['value']['main']['url'];?>" data-fimg="<?=$scratch_card['backimage']['value']['main']['url'];?>" id="scratchpad-<?=$index;?>" class="scratchpad"></div>
+	</figure>
 	<style>
 		#scratchpad-<?=$index;?> { width: 100%; height: <?=$scratch_card['frontimg']['value']['main']['dimensions']['height'];?>px; }
 	</style>
@@ -28,7 +30,7 @@
 	<script src="/assets/script/maxwise.js"></script>  
 	<script>
 		jQuery(document).ready(function($) {
-			$(parent.document.getElementById('<?=$type;?>-<?=(int)$index;?>')).find('iframe').height($(document).height());
+			$(parent.document.getElementById('<?=$type;?>-<?=(int)$index;?>')).find('iframe').height($('figure').attr('data-height'));
 		});
 	</script>
 </body>

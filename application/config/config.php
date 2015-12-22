@@ -25,7 +25,7 @@
 $config['base_url'] = '';
 
 $config['api_server'] = 'https://0vshk99s64.execute-api.ap-northeast-1.amazonaws.com';
-
+$config['preview_api_server'] = 'http://preview-web-729052429.ap-southeast-1.elb.amazonaws.com/api/';
 /*
 |--------------------------------------------------------------------------
 | Index File
