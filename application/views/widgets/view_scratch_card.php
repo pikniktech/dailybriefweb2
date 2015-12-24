@@ -4,14 +4,8 @@
 <iframe width="100%" height=300
     layout="responsive"
     frameborder="0"
-    src="/article/scratch_card?index=<?=$index;?>">
+    src="/article/scratch_card?index=<?=$index;?>&id=<?=$id;?>">
 </iframe>
-<!--
-	<div data-bimg="<?=$scratch_card['frontimg']['value']['main']['url'];?>" data-fimg="<?=$scratch_card['backimage']['value']['main']['url'];?>" id="scratchpad-<?=$index;?>" class="scratchpad"></div>
-	<style>
-		#scratchpad-<?=$index;?> { width: 100%; height: <?=$scratch_card['frontimg']['value']['main']['dimensions']['height'];?>px; }
-	</style>
--->
 </div>
 </section>
 <?php endif; ?>

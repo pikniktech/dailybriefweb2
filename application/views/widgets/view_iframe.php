@@ -6,6 +6,7 @@
 	<script src="/assets/script/jquery.mobile.custom.min.js"></script>
 	<style>
 		html, body { margin: 0; padding: 0;}
+		figure { margin: 0; }
 	</style>
 </head>
 <body>
@@ -19,11 +20,11 @@
             <span class="cd-handle"></span>
         </figure>
 	<?php elseif ($type == 'scratch_card') : ?>
-	<figure data-height="<?=@$scratch_card['frontimg']['value']['main']['dimensions']['height'];?>">
-	<div data-bimg="<?=@$scratch_card['frontimg']['value']['main']['url'];?>" data-fimg="<?=$scratch_card['backimage']['value']['main']['url'];?>" id="scratchpad-<?=$index;?>" class="scratchpad"></div>
+	<figure data-height="<?=@$scratch_card['backimage']['value']['main']['dimensions']['height'];?>">
+	<div data-bimg="<?=@$scratch_card['backimage']['value']['main']['url'];?>" data-fimg="<?=$scratch_card['frontimg']['value']['main']['url'];?>" id="scratchpad-<?=$index;?>" class="scratchpad"></div>
 	</figure>
 	<style>
-		#scratchpad-<?=$index;?> { width: 100%; height: <?=$scratch_card['frontimg']['value']['main']['dimensions']['height'];?>px; }
+		#scratchpad-<?=$index;?> {/* width: 100%; */ height: <?=$scratch_card['frontimg']['value']['main']['dimensions']['height'];?>px; }
 	</style>
 	<script src="/assets/script/wScratchPad.min.js"></script>   
 	<?php endif; ?>

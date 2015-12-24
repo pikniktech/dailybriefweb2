@@ -325,4 +325,7 @@ buttons {
   transition: transform 0.3s 0.7s, opacity 0s 0.7s;
 }
 
+h1, h2, h3, h4, h5, h6 { margin: 0 3rem 0.5rem 3rem; }
+h3 { border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 20px 0; }
 .fb-post, .fb-post iframe, .fb-post span { width: 100% !important; }
+p.caption { margin: .5em 2em 2em !important; font-style: italic; font-size: 1em !important; color: #666; }

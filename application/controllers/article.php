@@ -6,26 +6,54 @@ class Article extends MY_Controller {
 
 	private $scratch_card_counter = 0,
 		$slider_counter = 0,
-		$preview = false;	
+		$preview = true;	
 
 	public function frame($type) {
 		$index = (int)$this->input->get('index');
+		$id = $this->input->get('id');
 		$this->_article = $this->session->userdata('current_article');
 		if (empty($this->_article))
 			return;
 		
 		$this->_article = unserialize($this->_article);
-                switch ($type) {
+                
+		switch ($type) {
 			case 'slider':
-				$slider = @$this->_article['article.sliders']['value'][$index];
-		
+				if ($this->session->userdata('current_slider'.$id)):
+					$sliders = unserialize($this->session->userdata('current_slider'.$this->_article['id']));
+					$slider = @$sliders['value'][$index];
+				else:
+					$this->load->model("Article_model");
+					$article_result = $this->Article_model->get_detail($id, true, $this->preview);
+					if ($this->preview && $article_result)
+						$article_result = array(
+							'results' => array($article_result)
+					);
+				
+					$this->_article = (array)$article_result['results'][0];
+					$slider = @$this->_article['data']['article.sliders']['value'][$index];
+				endif;
+					
 				if (empty($slider))
 					return;
 
 				$this->load->view('widgets/view_iframe', array('type' => $type, 'index' => $index, 'slider'=> $slider));	
 			break;
 			case 'scratch_card':
-				$scratch_card = @$this->_article['article.scratchcards']['value'][$index];
+				if ($this->session->userdata('current_scratchcards'.$id)) : 
+					$scratch_cards = unserialize($this->session->userdata('current_scratchcards'.$this->_article['id']));
+					$scratch_card = @$this->_article['article.scratchcards']['value'][$index];
+				else:
+                                        $this->load->model("Article_model");
+                                        $article_result = $this->Article_model->get_detail($id, true, $this->preview);
+                                        if ($this->preview && $article_result)
+                                                $article_result = array(
+                                                        'results' => array($article_result)
+                                        );
+                                        $this->_article = (array)$article_result['results'][0];
+//$this->debug($this->_article, false);
+                                        $scratch_card = @$this->_article['data']['article.scratchcards']['value'][$index];
+				endif; 
 		
 				if (empty($scratch_card))
 					return;
@@ -64,10 +92,16 @@ class Article extends MY_Controller {
 		$this->session->set_userdata('current_article', serialize(array(
 			'id' => $this->_article['id'],
 			'article.title' => @$this->_article['data']['article.title'],
-			'article.sliders' => @$this->_article['data']['article.sliders'],
-			'article.scratchcards' => @$this->_article['data']['article.scratchcards'],
+//			'article.sliders' => @$this->_article['data']['article.sliders'],
+//			'article.scratchcards' => @$this->_article['data']['article.scratchcards'],
 		)));
 		
+		$this->session->set_userdata('current_slider'.$this->_article['id'], @serialize($this->_article['data']['article.sliders']));
+		$this->session->set_userdata('current_scratchcards'.$this->_article['id'], @serialize($this->_article['data']['article.scratchcards']));
+if ($this->input->get('test'))
+{
+	$this->debug($this->session->userdata('current_article'));
+}		
 		$category = $this->category_lookup($startup['categories'], @$this->_article['data']['article.category']['value']);		
 
 		$view_data = array(
@@ -85,17 +119,48 @@ class Article extends MY_Controller {
 
 	// render article content 
 	private function _render_content() {
-		$rendered_content = '';
+		$prev = $rendered_content = '';
 		foreach ($this->_article['data']['article.content']['value'] as $block) :
+			if ($prev == 'o-list-item' && !in_array($block['type'], array('o-list-item')))
+				$rendered_content .= '</ol>';
+			elseif ($prev == 'list-item' && !in_array($block['type'], array('list-item')))
+				$rendered_content .= '</ul>';
+
 			if ($block['type'] == 'paragraph') :
 				$rendered_content .= $this->_render_para($block);
 			elseif ($block['type'] == 'embed') :
 				$rendered_content .= preg_replace('/width="[0-9]+"/', 'width="100%"', $block['oembed']['html']);
 			elseif ($block['type'] == 'image') :
-				$rendered_content .= $this->load->view('widgets/view_image', array('image' => $block['url'], 'image2x' => $block['url']), true);
+				$rendered_content .= $this->load->view('widgets/view_image', array('image' => $block['url'], 'image2x' => $block['url'], 'src' => $block), true);
+			elseif ($block['type'] == 'o-list-item' || $block['type'] == 'list-item') :
+				if ($prev != $block['type'] && $block['type'] == 'o-list-item'):
+					$rendered_content .= '<ol>';
+				elseif ($prev != $block['type'] && $block['type'] == 'list-item'):
+					$rendered_content .= '<ul>';
+				endif;
+				$rendered_content .= $this->_render_para($block);
+			else:
+				$rendered_content .= $this->_render_para($block);
 			endif;
+			$prev = $block['type'];
 		endforeach;
 		return $rendered_content;
+	}
+	
+	private function _tag($t, $text='') {
+		$headings = array();
+		for($i=1; $i<=6; $i++)
+			$headings[] = 'heading'.$i;
+		
+		if (in_array($t, $headings)) :
+			return str_replace('heading', 'h', $t);
+		elseif (in_array($t, array('o-list-item', 'list-item'))) :
+			return 'li';
+		else:
+			return 'p';
+		endif;
+		//return (in_array($t, $headings) ? str_replace('heading', 'h', $t) : 
+		//	in_array($t, array('o-list-item', 'list-item')) ? 'li' : 'p');
 	}
 
 	// render paragraph 
@@ -114,18 +179,22 @@ class Article extends MY_Controller {
 			case 'scratch_card':
 				$scratch_card = $this->_article['data']['article.scratchcards']['value'][$this->scratch_card_counter];
 				if ($scratch_card)
-					$_rendered_content .= $this->load->view('widgets/view_scratch_card', array('index' => $this->scratch_card_counter, 'scratch_card' => $scratch_card), true);	
+					$_rendered_content .= $this->load->view('widgets/view_scratch_card', array('id'=> $this->_article['id'], 'index' => $this->scratch_card_counter, 'scratch_card' => $scratch_card), true);	
 				$this->scratch_card_counter++;
 			break;
 			case 'slider':
 				$slider = @$this->_article['data']['article.sliders']['value'][$this->slider_counter];
 				if ($slider) 
-					$_rendered_content .= $this->load->view('widgets/view_slider', array('index' => $this->slider_counter, 'slider' => $slider), true);	
-				
+					$_rendered_content .= $this->load->view('widgets/view_slider', array('id' => $this->_article['id'], 'index' => $this->slider_counter, 'slider' => $slider), true);	
 				$this->slider_counter++;
 			break;
+			case 'caption':
+			$_rendered_content .= '<p class="caption">'.$this->_spans($block).'</p>';
+			break;
 			default: 
-			$_rendered_content .= '<p>'.$this->_spans($block).'</p>';
+			$html_tag = $this->_tag($block['type'], $block['text']);
+			$_rendered_content .= '<'.$html_tag.'>'.$this->_spans($block).'</'.$html_tag.'>';
+			
 		}
 		return $_rendered_content;
 	}

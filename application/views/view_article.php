@@ -4,7 +4,7 @@
   <div class="loader-section section-left"></div>
   <div class="loader-section section-right"></div>
 </div>
-<div id="content-wrapper">
+<div id="content-wrapper2">
   <div id="image-carousel" class="dragdealer">
     <div class="handle">
       <div class="article-body">
