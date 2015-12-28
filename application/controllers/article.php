@@ -103,9 +103,9 @@ class Article extends MY_Controller {
 				elseif ($prev != $block['type'] && $block['type'] == 'list-item'):
 					$rendered_content .= '<ul>';
 				endif;
-				$rendered_content .= $this->_render_para($block);
+				$rendered_content .= $this->_render_para($block, $article);
 			else:
-				$rendered_content .= $this->_render_para($block);
+				$rendered_content .= $this->_render_para($block, $article);
 			endif;
 			$prev = $block['type'];
 		endforeach;
