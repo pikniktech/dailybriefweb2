@@ -28,6 +28,7 @@ $config['api_server'] = 'https://0vshk99s64.execute-api.ap-northeast-1.amazonaws
 $config['pubnub_publish_key'] = 'pub-c-e57702fe-3dfd-4002-9887-31a1a0b07c23';
 $config['pubnub_subscribe_key'] = 'sub-c-c6921f0a-a492-11e5-9937-02ee2ddab7fe';
 
+$config['preview_api_server'] = 'http://preview-web-729052429.ap-southeast-1.elb.amazonaws.com/api/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -371,11 +372,9 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-
-
 $config['redis'] = array(
 	"scheme" => "tcp",
-	"host" => "localhost", // dev redist endpoint "dev-cache.2m2of6.0001.apne1.cache.amazonaws.com",
+	"host" => "dev-cache.2m2of6.0001.apne1.cache.amazonaws.com", //"localhost", // dev redist endpoint "dev-cache.2m2of6.0001.apne1.cache.amazonaws.com",
 	"port" => 6379
 );
 

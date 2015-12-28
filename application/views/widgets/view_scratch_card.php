@@ -6,12 +6,6 @@
     frameborder="0"
     src="/article/scratch_card/<?=$article_id?>?index=<?=$index;?>">
 </iframe>
-<!--
-	<div data-bimg="<?=$scratch_card['frontimg']['value']['main']['url'];?>" data-fimg="<?=$scratch_card['backimage']['value']['main']['url'];?>" id="scratchpad-<?=$index;?>" class="scratchpad"></div>
-	<style>
-		#scratchpad-<?=$index;?> { width: 100%; height: <?=$scratch_card['frontimg']['value']['main']['dimensions']['height'];?>px; }
-	</style>
--->
 </div>
 </section>
 <?php endif; ?>
