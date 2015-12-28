@@ -3,7 +3,7 @@
 <iframe width="100%" height=300
     layout="responsive"
     frameborder="0"
-    src="/article/slider?index=<?=$index;?>&id=<?=$id;?>">
+    src="/article/slider/<?=$article_id?>?index=<?=$index;?>">
 </iframe>
     </div>
 </section>

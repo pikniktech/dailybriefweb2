@@ -1,361 +1,406 @@
 <!-- PreLoader -->
-    <div id="loader-wrapper">
-      <div id="loader"></div>
-      <div class="loader-section section-left"></div>
-      <div class="loader-section section-right"></div>
+<div id="loader-wrapper">
+  <div id="loader"></div>
+  <div class="loader-section section-left"></div>
+  <div class="loader-section section-right"></div>
+</div>
+<div id="content-wrapper">
+  <!-- Main content goes here -->
+  <div class="section-traffic">
+	<nav class="app-bar traffic">
+	  <div class="app-bar-icon left">
+		<i class="fa fa-angle-left"></i>
+	  </div>
+	  <div class="app-bar-icon right">
+		<i class="fa fa-video-camera"></i>
+		<i class="fa fa-comment current"></i>
+	  </div>
+	  <span class="app-bar-title">My <strong>Traffic</strong></span>
+	</nav>
+	<div class="message-group">
+	  <div class="message-body">
+		<!-- Message Start -->
+
+	  </div>
+	</div>
+	  <div class="message-panel">
+		<div class="message-box">
+		  <i class="fa fa-comment-o"></i>
+		  <input id="message_input" class="message-box" type="text" placeholder="Type a message">
+		  <button class="send-message" type="button">Send</button>
+		</div>
+	  </div>
+	<div class="search-map">
+	  <input id="pac_input" class="search-box" type="text" placeholder="Search Destination">
+	  <i class="fa fa-times close-search-icon"></i>
+	</div>
+	<div id="googleMap"></div>
+  </div>
+  <div class="btn-home orange traffic">
+	<i class="fa fa-home"></i>
+  </div>
+  <div class="live-traffic hide">
+  	<div class="live-traffic-body">
+  	  <h2>Select Your Location</h2>
+  	  <div class="traffic-options district">
+  		<label for="traffic-district">地區</label>
+  		<i class="fa fa-angle-down"></i>
+  		<select name="traffic-district">
+  		  <option value='' selected>請選擇地區</option>
+  		  <?php foreach($district_list as $district){?>
+  		  <option value="<?php echo $district?>"><?php echo $district?></option>
+  		  <?php } ?>
+  		</select>
+  	  </div>
+  	  <div class="traffic-options place">
+  		<label for="traffic-place">地點</label>
+  		<i class="fa fa-angle-down"></i>
+  		<select name="traffic-place">
+  		  <option  value='' selected>請選擇地點</option>
+  		</select>
+  	  </div>
+  	  <div class="live-traffic-video">
+  		<div class="live-ltraffic-ocation">Loading...</div>
+  		<img id="mainCamImage" src="./assets/images/H207F.JPG">
+  	  </div>
+  	  <div class="recent-locations">
+    		<h2>Recent Location</h2>
+    		<div class="mui-row nomargin" id="recentCamContainer">
+
+    		</div>
+  	  </div>
     </div>
-    <div id="content-wrapper">
-      <!-- Main content goes here -->
-      <div class="section-traffic">
-        <nav class="app-bar traffic">
-          <div class="app-bar-icon left">
-            <i class="fa fa-angle-left"></i>
-          </div>
-          <div class="app-bar-icon right">
-            <i class="fa fa-video-camera"></i>
-            <i class="fa fa-comment current"></i>
-          </div>
-          <span class="app-bar-title">My <strong>Traffic</strong></span>
-        </nav>
-        <div class="message-group">
-          <div class="message-body">
-            <!-- Message Start -->
-            <div class="message-detail">
-              <div class="profile-pic">
-                <img src="./assets/images/profile_pic_demo.jpg">
-              </div>
-              <div class="message-content">
-                <p><span>08:28</span>Happens everyday...</p>
-              </div>
-            </div>
-          </div>
-        </div>
-          <div class="message-panel">
-            <div class="message-box">
-              <i class="fa fa-smile-o"></i>
-              <input id="message_input" class="message-box" type="text" placeholder="Type a message">
-              <button class="send-message" type="button">Send</button>
-            </div>
-          </div>
-        <div class="search-map">
-          <input id="pac_input" class="search-box" type="text" placeholder="Search Destination">
-          <i class="fa fa-times close-search-icon"></i>
-        </div>
-        <div id="googleMap"></div>
-      </div>
-      <div class="btn-home orange traffic">
-        <i class="fa fa-home"></i>
-      </div>
-      <!-- Newd Feed Start -->
-      <div class="news-feed sports">
-        <div class="floater sports"></div>
-        <div class="news-feed-body sports">
-        <ul class="news-feed sports">
-          <li class="news-feed-title">Sports <i class="fa fa-cross"></i></li>
-          <li><a href="">0:0 逼和國足「美妙一夜」全城力撐 港足守出奇蹟</a></li>
-          <li><a href="">NBA 東岸列強「站起來」</a></li>
-          <li><a href="">喬帥擒費爸 年終賽4連霸封王</a></li>
-        </ul>
-      </div>
-        <div class="btn-menu-out bounce sports">
-          <i class="fa fa-angle-up"></i>
-        </div>
-      </div>
-      <!-- Newd Feed End -->
-      <div class="live-traffic hide">
-        <div class="floater traffic"></div>
-        <div class="live-traffic-body">
-          <h2>Select Your Location</h2>
-          <div class="traffic-options district">
-            <label for="traffic-district">地區</label>
-            <i class="fa fa-angle-down"></i>
-            <select name="traffic-district">
-              <option selected>請選擇地區</option>
-              <option value="hkisland">香港島</option>
-              <option value="kowloon">九龍</option>
-              <option value="new-territories">新界</option>
-            </select>
-          </div>
-          <div class="traffic-options place">
-            <label for="traffic-place">地點</label>
-            <i class="fa fa-angle-down"></i>
-            <select name="traffic-place">
-              <option selected>請選擇地點</option>
-              <option value="c1">海底隧道香港入口</option>
-              <option value="c2">香港仔海旁道近魚市場</option>
-              <option value="c3">香港仔隧道香港仔入口</option>
-              <option value="c4">香港仔隧道灣仔入口</option>
-              <option value="c5">菲林明道近港灣道</option>
-              <option value="c6">干諾道中近信德中心</option>
-            </select>
-          </div>
-          <div class="live-traffic-video">
-            <div class="live-ltraffic-ocation">海底隧道香港入口</div>
-            <img src="./assets/images/H207F.JPG">
-          </div>
-          <div class="recent-locations">
-            <h2>Recent Location</h2>
-            <div class="mui-row nomargin">
-              <div class="mui-col-xs-4">
-                <div class="cameras-location">
-                  <div class="placeText">海底隧道香港入口</div>
-                  <div class="location-pic place-01"></div>
-                </div>
-              </div>
-              <div class="mui-col-xs-4">
-                <div class="cameras-location">
-                  <div class="placeText">香港仔海旁道近魚市場</div>
-                  <div class="location-pic place-02"></div>
-                </div>
-              </div>
-              <div class="mui-col-xs-4">
-                <div class="cameras-location">
-                  <div class="placeText">香港仔隧道香港仔入口</div>
-                  <div class="location-pic place-03"></div>
-                </div>
-              </div>
-              <div class="mui-col-xs-4">
-                <div class="cameras-location">
-                  <div class="placeText">香港仔隧道灣仔入口</div>
-                  <div class="location-pic place-04"></div>
-                </div>
-              </div>
-              <div class="mui-col-xs-4">
-                <div class="cameras-location">
-                  <div class="placeText">菲林明道近港灣道</div>
-                  <div class="location-pic place-05"></div>
-                </div>
-              </div>
-              <div class="mui-col-xs-4">
-                <div class="cameras-location">
-                  <div class="placeText">干諾道中近信德中心</div>
-                  <div class="location-pic place-06"></div>
-                </div>
-              </div>
-          </div>
-        </div>
-        <div class="btn-menu-out bounce traffic">
-          <i class="fa fa-angle-up"></i>
-        </div>
-      </div>
-      <!-- Main Nav Start -->
-      <div class="main-nav">
-        <div class="floater home"></div>
-        <div class="main-nav-body">
-          <div class="mui-row">
-            <h2>MENU</h2>
-            <div class="mui-col-xs-4 mui-col-md-4">
-              <div class="main-nav-item item-01" id="trending">
-              </div>
-            </div>
-            <div class="mui-col-xs-4 mui-col-md-4">
-              <div class="main-nav-item item-02" id="weather">
-              </div>
-            </div>
-            <div class="mui-col-xs-4 mui-col-md-4">
-              <div class="main-nav-item item-03" id="traffic">
-              </div>
-            </div>
-            <div class="mui-col-xs-4 mui-col-md-4">
-              <div class="main-nav-item item-04" id="business">
-              </div>
-            </div>
-            <div class="mui-col-xs-4 mui-col-md-4">
-              <div class="main-nav-item item-05" id="food">
-              </div>
-            </div>
-            <div class="mui-col-xs-4 mui-col-md-4">
-              <div class="main-nav-item item-06" id="technology">
-              </div>
-            </div>
-            <div class="mui-col-xs-4 mui-col-md-4">
-              <div class="main-nav-item item-07" id="sports">
-              </div>
-            </div>
-            <div class="mui-col-xs-4 mui-col-md-4">
-              <div class="main-nav-item item-08" id="workplace">
-              </div>
-            </div>
-            <div class="mui-col-xs-4 mui-col-md-4">
-              <div class="main-nav-item item-09" id="pets">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btn-menu-out bounce home">
-          <i class="fa fa-angle-up"></i>
-        </div>
-      </div>
-      <!-- Main Nav End -->
+    <div class="btn-menu-out bounce traffic">
+    <i class="fa fa-angle-up"></i>
     </div>
-    <script>
-    jQuery(function($) {
-      //PreLoading items, animations
-      setTimeout(function(){
-        $('body').addClass('loaded');
-      }, 2000);
+  </div>
+  <!-- Main Nav Start -->
+  <?php $this->load->view("view_main_menu");?>
+  <!-- Main Nav End -->
+</div>
 
-      //Show Section Block
-      setTimeout(function(){
-        $('.section-block').removeClass('hide');
-      }, 3000);
-      setTimeout(function(){
-        $('.main-nav').addClass('hide');
-        $('.news-feed').addClass('hide');
-      }, 1000);
+<div id="tplCamHistoryItem" style="display:none">
+  <div class="mui-col-xs-4">
+	<div class="cameras-location">
+	  <div class="placeText"></div>
+	  <div class="location-pic"></div>
+	</div>
+  </div>
+</div>
 
-      //GoogleMap
-      function initialize() {
-        var mapCanvas = document.getElementById('googleMap');
-        var mapOptions = {
-          center: new google.maps.LatLng(44.5403, -78.5463),
-          zoom: 13,
-          disableDefaultUI: true,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
 
-        var infoWindow = new google.maps.InfoWindow({map: map});
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
+<!-- Include the PubNub Library -->
+<script src="https://cdn.pubnub.com/pubnub-dev.js"></script>
 
-        var map = new google.maps.Map(mapCanvas, mapOptions);
-        var trafficLayer = new google.maps.TrafficLayer();
-        trafficLayer.setMap(map);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
+<!-- Instantiate PubNub -->
+<script type="text/javascript">
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-      }
+var PUBNUB_traffic = PUBNUB.init({
+	publish_key: '<?=$this->config->item('pubnub_publish_key')?>',
+	subscribe_key: '<?=$this->config->item('pubnub_subscribe_key')?>'
+});
 
-      var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+// Subscribe to the channel
+PUBNUB_traffic.subscribe({
+    channel: 'traffic',
+    message: function(m){
+		//console.log(m)
+		var d = new Date();
+		var cur_time = formatDate(d, "hh:mm");
+		var $newMessage = '<div class="message-detail" style="opacity:0"><div class="profile-pic"><img src="./assets/images/profile_pic_demo.jpg"></div><div class="message-content"><p><span>' + cur_time + '</span>' + m.text + '</p></div></div>';
+		$('.message-body').append($newMessage);
+		$('.message-detail').last().animate({
+		  opacity: 1
+		}, 500, function(){
+		});
+	}
+});
 
-      function preventDefault(e) {
-        e = e || window.event;
-        if (e.preventDefault)
-            e.preventDefault();
-        e.returnValue = false;
-      }
+</script>
 
-      function preventDefaultForScrollKeys(e) {
-          if (keys[e.keyCode]) {
-              preventDefault(e);
-              return false;
-          }
-      }
+<script>
 
-      function disableScroll() {
-        if (window.addEventListener) // older FF
-            window.addEventListener('DOMMouseScroll', preventDefault, false);
-        window.onwheel = preventDefault; // modern standard
-        window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
-        window.ontouchmove  = preventDefault; // mobile
-        document.onkeydown  = preventDefaultForScrollKeys;
-      }
 
-      disableScroll();
+var cam_list = [];
+<?php foreach($cam_list as $cam){?>
+	cam_list.push({
+		'district': '<?php echo $cam->properties->district ?>',
+		'name': '<?php echo $cam->properties->name ?>',
+		'image': '<?php echo $cam->properties->image ?>',
+	});
+<?php }?>
 
-      //Buttons
-      $('.btn-home').on('click', function() {
-        $('.main-nav').removeClass('hide');
-      });
-      $('.btn-menu-out.home').on('click', function() {
-        $('.main-nav').addClass('hide');
-      });
-      $('.btn-menu-out.sports').on('click', function() {
-        $('.news-feed').addClass('hide');
-      });
-      $('.close-search-icon').on('click', function(){
-        var text = '';
-        $('.search-box').attr('value', text);
-      })
-      $('.btn-menu-out.traffic').on('click', function() {
-        $('.live-traffic').addClass('hide');
-      });
+// scroll back to top
+$('#message_input').on('focus', function () { window.scrollTo(0, 0) })
 
-      $('.fa-video-camera').on('click', function(){
-        $('.live-traffic').removeClass('hide');
-      });
+//Message Animation
+$('.send-message').click(function() {
+	var msg = $("#message_input").val();
+	$("#message_input").val('');
+	
+	PUBNUB_traffic.publish({
+		channel: 'traffic',
+		message: {"text": msg}
+	});
+});
 
-      // Main Nav - Responsive Part
-    	var $window = $(window).on('resize', function(){
-        $('#googleMap').height($(window).height());
-        $('.section-traffic').height($(window).height());
 
-        var $mainNavItem = $('.main-nav-item');
-        var $floaterHome = $('.floater.home');
-        var $mainNavBody = $('.main-nav-body .mui-row');
-    		var orgHeight = $mainNavItem.width();
-        $mainNavItem.css({"height":orgHeight+"px"});
-        var contentHeight = $mainNavBody.height();
-        var floaterHomeMargin = -(contentHeight/2);
-    		$floaterHome.css({"margin-bottom":floaterHomeMargin+"px"});
-    		$mainNavBody.css({"height":contentHeight+"px"});
+function refreshPlaceList()
+{
+	$("select[name=traffic-place] option:gt(0)").remove();
 
-        var $floaterSports = $('.floater.sports');
-        var $sportsBody = $('ul.news-feed.sports');
-        var $newsFeedBody = $('div.news-feed-body.sports');
-        var newsSportHeight = $sportsBody.height();
-        var floaterSportsMargin = -(newsSportHeight/2);
-        $floaterSports.css({"margin-bottom":floaterSportsMargin+"px"});
-        $newsFeedBody.css({"height":newsSportHeight+"px"});
+	var district = $("select[name=traffic-district]").val();
+	if(district == "")
+		return;
 
-        var $liveTrafficVideo = $('.live-traffic-video img');
-        var cameraHeight = $liveTrafficVideo.height();
-        $('.live-traffic-video').height(cameraHeight);
-        var $orgTrafficHeight = $('.recent-locations div div.mui-col-xs-4');
-        var $camerasLocation = $('.cameras-location');
-        var orgTrafficHeight = $orgTrafficHeight.width();
-        $camerasLocation.height(orgTrafficHeight);
+	for(var i=0; i<cam_list.length; i++)
+	{
+		if(cam_list[i].district == district)
+			$("select[name=traffic-place]").append("<option value='" + cam_list[i].name + "'>" + cam_list[i].name + "</option>");
+	}
+}
 
-        var orgplaceText = $('.placeText').height();
-        var locationCenterText = (orgTrafficHeight - orgplaceText)/2;
-        $('.placeText').css({"padding-top":locationCenterText+"px"});
+function updateCam()
+{
+	var place = $("select[name=traffic-place]").val();
+	if(place == "")
+		return;
 
-        var $floaterTraffic = $('.floater.traffic');
-        var $trafficBody = $('.live-traffic-body');
-        var newTrafficHeight = $trafficBody.height();
-        var floaterTrafficMargin = -(newTrafficHeight/2);
-        $floaterTraffic.css({"margin-bottom":floaterTrafficMargin+"px"});
-        $trafficBody.css({"height":newTrafficHeight+"px"});
+	//save viewed cam to cookie
+	var cam_history = readCookie("cam_history");
+	var cam_history_array = [];
+	if(cam_history != null && cam_history != "")
+		cam_history_array = cam_history.split(",");
 
-    	}).trigger('resize');
+	if(cam_history_array.indexOf(place) < 0)
+		cam_history_array.push(place);
 
-      $('.main-nav-item').click(function(){
-          var callPanelID = $(this).attr('id');
-          $('.news-feed.'+callPanelID).removeClass('hide');
-      });
+	while(cam_history_array.length > 6)
+		cam_history_array.shift();
 
-    });
-    // scroll back to top
-    $('#message_input').on('focus', function () { window.scrollTo(0, 0) })
+	cam_history = cam_history_array.join();
+	createCookie("cam_history", cam_history, 60);
 
-      //Message Animation
-      $('.send-message').click(function() {
-        var $newMessage = '<div class="message-detail" style="opacity:0"><div class="profile-pic"><img src="./assets/images/profile_pic_demo.jpg"></div><div class="message-content"><p><span>08:28</span>Happens everyday...</p></div></div>';
-        $('.message-body').append($newMessage);
-        $('.message-detail').last().animate({
-          opacity: 1
-        }, 500, function(){
-        });
-      });
+
+	for(var i=0; i<cam_list.length; i++)
+	{
+		if(cam_list[i].name == place)
+		{
+			$("div.live-ltraffic-ocation").html(cam_list[i].name);
+			$("#mainCamImage").fadeOut(1000);
+			$("#mainCamImage").attr('src', cam_list[i].image).fadeIn(1000);
+			break;
+		}
+	}
+}
+
+function setCamByPos(pos)
+{
+	var url = '/traffic/doGetCamByLngLat?lng=' + pos.lng + "&lat=" + pos.lat;
+	$.ajax({
+		url: url,
+		dataType: "json",
+	}).done(function(response){
+		$("select[name=traffic-district]").val(response.data.district);
+		refreshPlaceList();
+		$("select[name=traffic-place]").val(response.data.name);
+		updateCam();
+	});
+}
+
+function setDefaultCam()
+{
+	//preset first camera
+	var first_district = $("select[name=traffic-district] option:eq(1)").val();
+	if(first_district)
+	{
+		$("select[name=traffic-district]").val(first_district);
+		refreshPlaceList();
+		var first_place = $("select[name=traffic-place] option:eq(1)").val();
+		if(first_place)
+		{
+			$("select[name=traffic-place]").val(first_place);
+			updateCam();
+		}
+	}
+
+}
+
+jQuery(function($) {
+
+
+  //PreLoading items, animations
+  setTimeout(function(){
+	$('body').addClass('loaded');
+  }, 2000);
+
+  //Show Section Block
+  setTimeout(function(){
+	$('.section-block').removeClass('hide');
+  }, 3000);
+  setTimeout(function(){
+	$('.main-nav').addClass('hide');
+	$('.news-feed').addClass('hide');
+  }, 1000);
+
+  //GoogleMap
+  function initialize() {
+	var mapCanvas = document.getElementById('googleMap');
+	var mapOptions = {
+	  center: new google.maps.LatLng(44.5403, -78.5463),
+	  zoom: 13,
+	  disableDefaultUI: true,
+	  mapTypeId: google.maps.MapTypeId.ROADMAP
+	}
+
+	var infoWindow = new google.maps.InfoWindow({map: map});
+	// Try HTML5 geolocation.
+	if (navigator.geolocation) {
+	  navigator.geolocation.getCurrentPosition(function(position) {
+		var pos = {
+		  lat: position.coords.latitude,
+		  lng: position.coords.longitude
+		};
+
+		infoWindow.setPosition(pos);
+		infoWindow.setContent('Location found.');
+		map.setCenter(pos);
+
+		setCamByPos(pos);
+	  }, function() {
+		handleLocationError(true, infoWindow, map.getCenter());
+		setDefaultCam();
+	  });
+	} else {
+	  // Browser doesn't support Geolocation
+	  handleLocationError(false, infoWindow, map.getCenter());
+	  setDefaultCam();
+	}
+
+	var map = new google.maps.Map(mapCanvas, mapOptions);
+	var trafficLayer = new google.maps.TrafficLayer();
+	trafficLayer.setMap(map);
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+	infoWindow.setPosition(pos);
+	infoWindow.setContent(browserHasGeolocation ?
+						  'Error: The Geolocation service failed.' :
+						  'Error: Your browser doesn\'t support geolocation.');
+  }
+
+  var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+  function preventDefault(e) {
+	e = e || window.event;
+	if (e.preventDefault)
+		e.preventDefault();
+	e.returnValue = false;
+  }
+
+  function preventDefaultForScrollKeys(e) {
+	  if (keys[e.keyCode]) {
+		  preventDefault(e);
+		  return false;
+	  }
+  }
+
+  function disableScroll() {
+	if (window.addEventListener) // older FF
+		window.addEventListener('DOMMouseScroll', preventDefault, false);
+	window.onwheel = preventDefault; // modern standard
+	window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+	window.ontouchmove  = preventDefault; // mobile
+	document.onkeydown  = preventDefaultForScrollKeys;
+  }
+
+  disableScroll();
+
+  //schedule update the cam image
+  setInterval(function(){
+	  var imgsrc = $("#mainCamImage").attr('src');
+	  d = new Date();
+	  imgsrc = updateQueryStringParameter(imgsrc, "t", d.getTime());
+	  $("#mainCamImage").attr('src', imgsrc);
+  }, 60000);
+
+	//load cam history
+	var cam_history = readCookie("cam_history");
+	var cam_history_array = [];
+	if(cam_history != null && cam_history != "")
+		cam_history_array = cam_history.split(",");
+
+	//recentCamContainer
+	//tplCamHistoryItem
+	$("#recentCamContainer").html('');
+	for(var i=0; i<cam_history_array.length; i++)
+	{
+		for(var j=0; j<cam_list.length; j++)
+		{
+			if(cam_list[j].name == cam_history_array[i])
+			{
+				var cam_html = $("#tplCamHistoryItem").html();
+				var cam_element = $(cam_html).appendTo($("#recentCamContainer"));
+				cam_element.find(".placeText").html(cam_list[j].name);
+				cam_element.find(".location-pic").css('background-image', 'url(' + cam_list[j].image + ')');
+				break;
+			}
+		}
+	}
+
+  //Buttons for Traffic
+  $('.close-search-icon').on('click', function(){
+	var text = '';
+	$('.search-box').attr('value', text);
+  })
+  $('.btn-menu-out.traffic').on('click', function() {
+	$('.live-traffic').addClass('hide');
+  });
+
+  $('.fa-video-camera').on('click', function(){
+	$('.live-traffic').removeClass('hide');
+  });
+
+  $('div.app-bar-icon.left').click(function(){
+	window.location = "/";
+  });
+
+  // Responsive Part
+	var $window = $(window).on('resize', function(){
+	$('#googleMap').height($(window).height());
+	$('.section-traffic').height($(window).height());
+
+  // Traffic Overlay
+  var $trafficBody = $('.live-traffic-body');
+  $trafficBody.height($(window).height());
+	var $liveTrafficVideo = $('.live-traffic-video img');
+	var cameraHeight = $liveTrafficVideo.height();
+	$('.live-traffic-video').height(cameraHeight);
+	var $orgTrafficHeight = $('.recent-locations div div.mui-col-xs-4');
+	var $camerasLocation = $('.cameras-location');
+	var orgTrafficHeight = $orgTrafficHeight.width();
+	$camerasLocation.height(orgTrafficHeight);
+
+  // Traffic Overlay - Location Pic & Text
+  var locationPicHeight = $('.location-pic').width();
+  $('.location-pic').height(locationPicHeight);
+
+	var orgplaceText = $('.placeText').height();
+	var locationCenterText = (orgTrafficHeight - orgplaceText)/2;
+	$('.placeText').css({"padding-top":locationCenterText+"px"});
+
+	}).trigger('resize');
+
+  $("select[name=traffic-district]").change(function(){
+	  refreshPlaceList();
+  });
+
+  $("select[name=traffic-place]").change(function(){
+	  updateCam();
+  });
+
+});
+
 </script>

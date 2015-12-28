@@ -4,7 +4,7 @@
 <iframe width="100%" height=300
     layout="responsive"
     frameborder="0"
-    src="/article/scratch_card?index=<?=$index;?>&id=<?=$id;?>">
+    src="/article/scratch_card/<?=$article_id?>?index=<?=$index;?>">
 </iframe>
 </div>
 </section>

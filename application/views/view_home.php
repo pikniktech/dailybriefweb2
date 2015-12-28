@@ -13,8 +13,8 @@
 		  <!-- Slides Container -->
 		  <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 414px;  height: 736px;
 	  overflow: hidden;">
+			  <? $idx = 0?>
 			  <? foreach($article_list as $article){?>
-			    <? $idx = 0?>
 				<? if($article['cover_image'] != ""){?>
 				  <div id="article_<?=$idx?>" data-id="<?=$article['id']?>" data-slug="<?=$article['slug']?>">
 					  <div class="section-block orange hide">
@@ -45,70 +45,8 @@
   <div class="btn-home orange">
 	<i class="fa fa-home"></i>
   </div>
-  <!-- Newd Feed Start -->
-  <div class="news-feed sports">
-	<div class="floater sports"></div>
-	<div class="news-feed-body sports">
-	<ul class="news-feed sports">
-	  <li class="news-feed-title">Sports <i class="fa fa-cross"></i></li>
-	  <li><a href="">0:0 逼和國足「美妙一夜」全城力撐 港足守出奇蹟</a></li>
-	  <li><a href="">NBA 東岸列強「站起來」</a></li>
-	  <li><a href="">喬帥擒費爸 年終賽4連霸封王</a></li>
-	</ul>
-  </div>
-	<div class="btn-menu-out bounce sports">
-	  <i class="fa fa-angle-up"></i>
-	</div>
-  </div>
-  <!-- Newd Feed End -->
   <!-- Main Nav Start -->
-  <div class="main-nav">
-	<div class="floater home"></div>
-	<div class="main-nav-body">
-	  <div class="mui-row">
-		<h2>MENU</h2>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-01" id="trending">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-02" id="weather">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-03" id="traffic">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-04" id="business">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-05" id="food">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-06" id="technology">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-07" id="sports">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-08" id="workplace">
-		  </div>
-		</div>
-		<div class="mui-col-xs-4 mui-col-md-4">
-		  <div class="main-nav-item item-09" id="pets">
-		  </div>
-		</div>
-	  </div>
-	</div>
-	<div class="btn-menu-out bounce home">
-	  <i class="fa fa-angle-up"></i>
-	</div>
-  </div>
+  <?php $this->load->view("view_main_menu");?>
 </div>
 <script>
 jQuery(function($) {
@@ -154,10 +92,10 @@ jQuery(function($) {
 		var artdiv = $("#article_" + slideIndex);
 		if(artdiv)
 		{
-			window.location = "/article/view/" + artdiv.data("id") + "/" + artdiv.data("slug");
+			window.location = "/article/" + artdiv.data("id") + "/" + artdiv.data("slug");
 		}
 	});
-	
+
 	//responsive code begin
 	//you can remove responsive code if you don't want the slider to scale along with window
 	function ScaleSlider() {
@@ -213,45 +151,6 @@ jQuery(function($) {
 	}
 
 	disableScroll();
-
-	//Buttons
-	$('.btn-home').on('click', function() {
-		$('.main-nav').removeClass('hide');
-	});
-	$('.btn-menu-out.home').on('click', function() {
-		$('.main-nav').addClass('hide');
-	});
-	$('.btn-menu-out.sports').on('click', function() {
-		$('.news-feed').addClass('hide');
-	});
-
-	// Main Nav - Responsive Part
-	var $window = $(window).on('resize', function(){
-	var $mainNavItem = $('.main-nav-item');
-	var $floaterHome = $('.floater.home');
-	var $mainNavBody = $('.main-nav-body .mui-row');
-	var orgHeight = $mainNavItem.width();
-	$mainNavItem.css({"height":orgHeight+"px"});
-	var contentHeight = $mainNavBody.height();
-	var floaterHomeMargin = -(contentHeight/2);
-		$floaterHome.css({"margin-bottom":floaterHomeMargin+"px"});
-		$mainNavBody.css({"height":contentHeight+"px"});
-
-	var $floaterSports = $('.floater.sports');
-	var $sportsBody = $('ul.news-feed.sports');
-	var $newsFeedBody = $('div.news-feed-body.sports');
-	var newsSportHeight = $sportsBody.height();
-	var floaterSportsMargin = -(newsSportHeight/2);
-	$floaterSports.css({"margin-bottom":floaterSportsMargin+"px"});
-	$newsFeedBody.css({"height":newsSportHeight+"px"});
-	}).trigger('resize');
-
-	$('.main-nav-item').click(function(){
-	  var callPanelID = $(this).attr('id');
-	  $('.news-feed.'+callPanelID).removeClass('hide');
-	});
-  
-  
 });
 
 

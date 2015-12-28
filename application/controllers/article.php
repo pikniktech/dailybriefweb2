@@ -2,49 +2,32 @@
 
 class Article extends MY_Controller {	
 
-	private $_article = null;
-
 	private $scratch_card_counter = 0,
 		$slider_counter = 0,
-		$preview = true;	
+		$preview = false;	
 
-	public function frame($type) {
+	public function frame($type, $article_id) {
 		$index = (int)$this->input->get('index');
-		$id = $this->input->get('id');
-
-		$this->_article = $this->session->userdata('current_article');
-		if (empty($this->_article)) :
-			$this->load->model("Article_model");
-			$article_result = $this->Article_model->get_detail($id, true, $this->preview);
-			if ($this->preview && $article_result)
-				$article_result = array('results' => array($article_result));
-			$this->_article = (array)$article_result['results'][0];
-		else:
-			$this->_article = unserialize($this->_article);
-		endif;
+		$this->load->model("Article_model");
 		
-
-		switch ($type) {
+		$article_result = $this->Article_model->get_detail($article_id, true, $this->preview);
+		
+		if(count($article_result['results']) == 0)
+			return;
+		
+		$article = $article_result['results'][0]['data'];
+		
+	        switch ($type) {
 			case 'slider':
-				if ($this->session->userdata('current_slider'.$id)):
-					$sliders = unserialize($this->session->userdata('current_slider'.$this->_article['id']));
-					$slider = @$sliders['value'][$index];
-				else:
-					$slider = @$this->_article['data']['article.sliders']['value'][$index];
-				endif;
-					
+				$slider = @$article['article.sliders']['value'][$index];
+
 				if (empty($slider))
 					return;
 
 				$this->load->view('widgets/view_iframe', array('type' => $type, 'index' => $index, 'slider'=> $slider));	
 			break;
 			case 'scratch_card':
-				if ($this->session->userdata('current_scratchcards'.$id)) : 
-					$scratch_cards = unserialize($this->session->userdata('current_scratchcards'.$this->_article['id']));
-					$scratch_card = @$this->_article['article.scratchcards']['value'][$index];
-				else:
-                                        $scratch_card = @$this->_article['data']['article.scratchcards']['value'][$index];
-				endif; 
+				$scratch_card = @$article['article.scratchcards']['value'][$index];
 		
 				if (empty($scratch_card))
 					return;
@@ -63,7 +46,7 @@ class Article extends MY_Controller {
 	{
 		$this->inapp = @($_GET['inapp']==1);
 		$this->load->model("Article_model");
-
+		
 		$article_result = $this->Article_model->get_detail($article_id, true, $this->preview);
 		
 		if ($this->preview && $article_result)
@@ -79,46 +62,37 @@ class Article extends MY_Controller {
 			die();
 		}
 	
-		$this->_article = (array)$article_result['results'][0];
-		$this->session->set_userdata('current_article', serialize(array(
-			'id' => $this->_article['id'],
-			'article.title' => @$this->_article['data']['article.title'],
-//			'article.sliders' => @$this->_article['data']['article.sliders'],
-//			'article.scratchcards' => @$this->_article['data']['article.scratchcards'],
-		)));
-		
-		$this->session->set_userdata('current_slider'.$this->_article['id'], @serialize($this->_article['data']['article.sliders']));
-		$this->session->set_userdata('current_scratchcards'.$this->_article['id'], @serialize($this->_article['data']['article.scratchcards']));
-if ($this->input->get('test'))
-{
-	$this->debug($this->session->userdata('current_article'));
-}		
-		$category = $this->category_lookup($startup['categories'], @$this->_article['data']['article.category']['value']);		
+		$article = (array)$article_result['results'][0];
+		$category = $this->category_lookup($startup['categories'], @$article['data']['article.category']['value']);		
 
+		$is_webview = false;
+		if($title == "_webview_")
+			$is_webview = true;
+		
 		$view_data = array(
 			'partial_view' => "view_article",
 			'category' => $category,
-			'featured_image' => ($this->inapp ? null : @$this->_article['data']['article.featuredimage']['value']['main']['url']),
-			'featured_video' => ($this->inapp ? null : str_replace('.mp4', '.gif', @$this->_article['data']['article.featuredvideo']['value'][0]['text'])),
-			'article' => $this->_article,
-			'article_content' => $this->_render_content(),
-			'pub_date' => @$this->_article['data']['article.date']['value'] ? date('F d, Y h:ma', strtotime($this->_article['data']['article.date']['value'])) : '',
+			'featured_image' => ($this->inapp ? null : @$article['data']['article.featuredimage']['value']['main']['url']),
+			'featured_video' => ($this->inapp ? null : str_replace('.mp4', '.gif', @$article['data']['article.featuredvideo']['value'][0]['text'])),
+			'article' => $article,
+			'article_content' => $this->_render_content($article),
+			'pub_date' => @$article['data']['article.date']['value'] ? date('F d, Y h:ma', strtotime($article['data']['article.date']['value'])) : '',
+			'is_webview' => $is_webview,
 		);
 
 		$this->load_view('view_master', $view_data);
 	}
 
 	// render article content 
-	private function _render_content() {
+	private function _render_content($article) {
 		$prev = $rendered_content = '';
-		foreach ($this->_article['data']['article.content']['value'] as $block) :
+		foreach ($article['data']['article.content']['value'] as $block) :
 			if ($prev == 'o-list-item' && !in_array($block['type'], array('o-list-item')))
 				$rendered_content .= '</ol>';
 			elseif ($prev == 'list-item' && !in_array($block['type'], array('list-item')))
 				$rendered_content .= '</ul>';
-
 			if ($block['type'] == 'paragraph') :
-				$rendered_content .= $this->_render_para($block);
+				$rendered_content .= $this->_render_para($block, $article);
 			elseif ($block['type'] == 'embed') :
 				$rendered_content .= preg_replace('/width="[0-9]+"/', 'width="100%"', $block['oembed']['html']);
 			elseif ($block['type'] == 'image') :
@@ -155,7 +129,7 @@ if ($this->input->get('test'))
 	}
 
 	// render paragraph 
-	private function _render_para($block) {
+	private function _render_para($block, $article) {
 		$_rendered_content = '';
 		switch (@$block['label']) {
 			case 'instagram_quote':
@@ -165,18 +139,18 @@ if ($this->input->get('test'))
 				$_rendered_content .= $this->load->view('widgets/view_twitter_quote', $block, true);			
 			break;
 			case 'image_gallery':
-				$_rendered_content .= $this->load->view('widgets/view_image_gallery', array('gallery' => $this->_article['data']['article.gallery']['value']), true);
+				$_rendered_content .= $this->load->view('widgets/view_image_gallery', array('gallery' => $article['data']['article.gallery']['value']), true);
 				break;
 			case 'scratch_card':
-				$scratch_card = $this->_article['data']['article.scratchcards']['value'][$this->scratch_card_counter];
+				$scratch_card = $article['data']['article.scratchcards']['value'][$this->scratch_card_counter];
 				if ($scratch_card)
-					$_rendered_content .= $this->load->view('widgets/view_scratch_card', array('id'=> $this->_article['id'], 'index' => $this->scratch_card_counter, 'scratch_card' => $scratch_card), true);	
+					$_rendered_content .= $this->load->view('widgets/view_scratch_card', array('index' => $this->scratch_card_counter, 'scratch_card' => $scratch_card, 'article_id' => $article['id']), true);	
 				$this->scratch_card_counter++;
 			break;
 			case 'slider':
-				$slider = @$this->_article['data']['article.sliders']['value'][$this->slider_counter];
-				if ($slider) 
-					$_rendered_content .= $this->load->view('widgets/view_slider', array('id' => $this->_article['id'], 'index' => $this->slider_counter, 'slider' => $slider), true);	
+				$slider = $article['data']['article.sliders']['value'][$this->slider_counter];
+				if ($slider)
+					$_rendered_content .= $this->load->view('widgets/view_slider', array('index' => $this->slider_counter, 'slider' => $slider, 'article_id' => $article['id']), true);	
 				$this->slider_counter++;
 			break;
 			case 'caption':

@@ -1,6 +1,10 @@
 <? if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Article_model extends My_Model {
+
+	function get_list() {
+		$this->get_landing_list();
+	}
 	
 	function get_landing_list()
 	{

@@ -25,6 +25,9 @@
 $config['base_url'] = '';
 
 $config['api_server'] = 'https://0vshk99s64.execute-api.ap-northeast-1.amazonaws.com';
+$config['pubnub_publish_key'] = 'pub-c-e57702fe-3dfd-4002-9887-31a1a0b07c23';
+$config['pubnub_subscribe_key'] = 'sub-c-c6921f0a-a492-11e5-9937-02ee2ddab7fe';
+
 $config['preview_api_server'] = 'http://preview-web-729052429.ap-southeast-1.elb.amazonaws.com/api/';
 /*
 |--------------------------------------------------------------------------
