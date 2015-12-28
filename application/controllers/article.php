@@ -11,26 +11,25 @@ class Article extends MY_Controller {
 	public function frame($type) {
 		$index = (int)$this->input->get('index');
 		$id = $this->input->get('id');
+
 		$this->_article = $this->session->userdata('current_article');
-		if (empty($this->_article))
-			return;
+		if (empty($this->_article)) :
+			$this->load->model("Article_model");
+			$article_result = $this->Article_model->get_detail($id, true, $this->preview);
+			if ($this->preview && $article_result)
+				$article_result = array('results' => array($article_result));
+			$this->_article = (array)$article_result['results'][0];
+		else:
+			$this->_article = unserialize($this->_article);
+		endif;
 		
-		$this->_article = unserialize($this->_article);
-                
+
 		switch ($type) {
 			case 'slider':
 				if ($this->session->userdata('current_slider'.$id)):
 					$sliders = unserialize($this->session->userdata('current_slider'.$this->_article['id']));
 					$slider = @$sliders['value'][$index];
 				else:
-					$this->load->model("Article_model");
-					$article_result = $this->Article_model->get_detail($id, true, $this->preview);
-					if ($this->preview && $article_result)
-						$article_result = array(
-							'results' => array($article_result)
-					);
-				
-					$this->_article = (array)$article_result['results'][0];
 					$slider = @$this->_article['data']['article.sliders']['value'][$index];
 				endif;
 					
@@ -44,14 +43,6 @@ class Article extends MY_Controller {
 					$scratch_cards = unserialize($this->session->userdata('current_scratchcards'.$this->_article['id']));
 					$scratch_card = @$this->_article['article.scratchcards']['value'][$index];
 				else:
-                                        $this->load->model("Article_model");
-                                        $article_result = $this->Article_model->get_detail($id, true, $this->preview);
-                                        if ($this->preview && $article_result)
-                                                $article_result = array(
-                                                        'results' => array($article_result)
-                                        );
-                                        $this->_article = (array)$article_result['results'][0];
-//$this->debug($this->_article, false);
                                         $scratch_card = @$this->_article['data']['article.scratchcards']['value'][$index];
 				endif; 
 		

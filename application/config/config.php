@@ -369,11 +369,9 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-
-
 $config['redis'] = array(
 	"scheme" => "tcp",
-	"host" => "localhost", // dev redist endpoint "dev-cache.2m2of6.0001.apne1.cache.amazonaws.com",
+	"host" => "dev-cache.2m2of6.0001.apne1.cache.amazonaws.com", //"localhost", // dev redist endpoint "dev-cache.2m2of6.0001.apne1.cache.amazonaws.com",
 	"port" => 6379
 );
 
