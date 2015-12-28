@@ -28,6 +28,11 @@ $config['api_server'] = 'http://dev-api-1920956738.ap-southeast-1.elb.amazonaws.
 $config['pubnub_publish_key'] = 'pub-c-e57702fe-3dfd-4002-9887-31a1a0b07c23';
 $config['pubnub_subscribe_key'] = 'sub-c-c6921f0a-a492-11e5-9937-02ee2ddab7fe';
 
+$config['redis'] = array(
+	"scheme" => "tcp",
+	"host" => "localhost", // dev redist endpoint "dev-cache.2m2of6.0001.apne1.cache.amazonaws.com",
+	"port" => 6379
+);
 
 /*
 |--------------------------------------------------------------------------
