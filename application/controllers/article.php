@@ -4,7 +4,7 @@ class Article extends MY_Controller {
 
 	private $scratch_card_counter = 0,
 		$slider_counter = 0,
-		$preview = false;	
+		$preview = true;	
 
 	public function frame($type, $article_id) {
 		$index = (int)$this->input->get('index');
@@ -103,9 +103,9 @@ class Article extends MY_Controller {
 				elseif ($prev != $block['type'] && $block['type'] == 'list-item'):
 					$rendered_content .= '<ul>';
 				endif;
-				$rendered_content .= $this->_render_para($block);
+				$rendered_content .= $this->_render_para($block, $article);
 			else:
-				$rendered_content .= $this->_render_para($block);
+				$rendered_content .= $this->_render_para($block, $article);
 			endif;
 			$prev = $block['type'];
 		endforeach;
