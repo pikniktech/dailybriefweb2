@@ -36,39 +36,7 @@
         </div>
       </div>
 	  
-      <div class="article-body">
-		<?php if(!$is_webview){?>
-			<?php if ($category) : ?>
-				<div class="section-block orange" style="background: <?=$category['topbar_color'];?>">
-				  <div><?=$category['name'];?></div>
-				</div>
-			<?php endif; ?>
-			<?php if ($featured_video || $featured_image) : ?>
-				<div class="article-visual">
-				<?php if ($featured_video) : ?>
-					<img u=image src="<?=$featured_video;?>" class="visual-image" />
-				<?php elseif ($featured_image) : ?>
-					<img u=image src="<?=$featured_image;?>" class="visual-image" />
-				<?php endif; ?>
-				</div>
-			<?php endif; ?>
-		<?php } ?>
-        <div class="article-content">
-		<h2><?=@$article['data']['article.title']['value'][0]['text'];?></h2>
-		<span class="article-info"><?php echo $pub_date;?></span>
-		<?=@$article_content; ?>
-          <div class="article-tag">
-			<?php foreach ($article['tags'] as $tag) : ?>
-				<span><a href="/tags/<?=$tag;?>"><?=$tag;?></a></span>
-			<?php endforeach; ?>
-          </div>
-        </div>
-      </div>
-	  
     </div>
-  </div>
-  <div class="btn-home orange">
-    <i class="fa fa-home"></i>
   </div>
   <!-- Main Nav Start -->
   <?php if(!$is_webview){?>
