@@ -58,6 +58,7 @@ jQuery(function($) {
 	}
 	<?}?>
 	
+	/*
 	var $scroller = $(".article-body");
 	$scroller.bind('touchstart', function (ev) {
 	  var $this = $(this);
@@ -70,6 +71,7 @@ jQuery(function($) {
 	  var contentHeight = scrollHeight - offsetHeight;
 	  if (contentHeight == scrollTop) $this.scrollTop(scrollTop-1);
 	});
+	*/
 
 	<?php if($is_webview){?>
 		$('body').addClass('loaded');
