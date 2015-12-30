@@ -4,7 +4,7 @@ class Article extends MY_Controller {
 
 	private $scratch_card_counter = 0,
 		$slider_counter = 0,
-		$preview = true;	
+		$preview = false;	
 
 	public function frame($type, $article_id) {
 		$index = (int)$this->input->get('index');
