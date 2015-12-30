@@ -175,8 +175,9 @@ buttons {
 .article-body section.twitter div.wrapper { margin: auto;/*display: inline-block; */ }
 
 /* slider component */
-
+.slider > div, .scratch_card > div { text-align: center; }
 .slider-before-img, .slider-after-img { width: 100%; }
+
 
 .cd-image-container {
   position: relative;

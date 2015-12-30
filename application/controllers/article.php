@@ -4,18 +4,18 @@ class Article extends MY_Controller {
 
 	private $scratch_card_counter = 0,
 		$slider_counter = 0,
-		$preview = false;	
+		$preview = true;	
 
 	public function frame($type, $article_id) {
 		$index = (int)$this->input->get('index');
 		$this->load->model("Article_model");
 		
 		$article_result = $this->Article_model->get_detail($article_id, true, $this->preview);
-		
-		if(count($article_result['results']) == 0)
+
+		if((!$this->preview && count($article_result['results']) == 0) || ($this->preview && empty($article_result)))
 			return;
-		
-		$article = $article_result['results'][0]['data'];
+
+		$article = $this->preview ? $article_result['data'] : $article_result['results'][0]['data'];
 		
 	        switch ($type) {
 			case 'slider':
