@@ -3,7 +3,7 @@
 class Article_model extends My_Model {
 
 	function get_list() {
-		$this->get_landing_list();
+		return $this->get_landing_list();
 	}
 	
 	function get_landing_list()
@@ -13,7 +13,7 @@ class Article_model extends My_Model {
 		$json_content = file_get_contents($service_url);
 		
 		$json = json_decode($json_content);
-		
+	
 		return $json->response;
 	}
 	
