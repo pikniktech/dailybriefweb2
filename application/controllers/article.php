@@ -11,11 +11,11 @@ class Article extends MY_Controller {
 		$this->load->model("Article_model");
 		
 		$article_result = $this->Article_model->get_detail($article_id, true, $this->preview);
-		
-		if(count($article_result['results']) == 0)
+
+		if((!$this->preview && count($article_result['results']) == 0) || ($this->preview && empty($article_result)))
 			return;
-		
-		$article = $article_result['results'][0]['data'];
+
+		$article = $this->preview ? $article_result['data'] : $article_result['results'][0]['data'];
 		
 	        switch ($type) {
 			case 'slider':
