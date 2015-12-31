@@ -25,8 +25,10 @@ jQuery(document).ready(function($){
 		$('.scratchpad').each(function(index, ele) {
     			$(this).wScratchPad({
         			size        : 50,         
-        			bg          : 'https://crossorigin.me/'+$(this).attr('data-bimg'),
-        			fg          : 'https://crossorigin.me/'+$(this).attr('data-fimg'),
+        			bg          : 'http://cors-proxy-252578225.ap-northeast-1.elb.amazonaws.com/'+$(this).attr('data-bimg'),
+//				'https://crossorigin.me/'+$(this).attr('data-bimg'),
+        			fg          : 'http://cors-proxy-252578225.ap-northeast-1.elb.amazonaws.com/'+$(this).attr('data-fimg'),
+//				'https://crossorigin.me/'+$(this).attr('data-fimg'),
         			realtime    : true,       
         			scratchDown : null,       
         			scratchUp   : null,       

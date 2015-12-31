@@ -11,11 +11,11 @@ class Article extends MY_Controller {
 		$this->load->model("Article_model");
 		
 		$article_result = $this->Article_model->get_detail($article_id, true, $this->preview);
-		
-		if(count($article_result['results']) == 0)
+
+		if((!$this->preview && count($article_result['results']) == 0) || ($this->preview && empty($article_result)))
 			return;
-		
-		$article = $article_result['results'][0]['data'];
+
+		$article = $this->preview ? $article_result['data'] : $article_result['results'][0]['data'];
 		
 	        switch ($type) {
 			case 'slider':
@@ -42,7 +42,12 @@ class Article extends MY_Controller {
 		$this->view($article_id, '');
 	}
 
-	public function view($article_id, $title)
+	public function preview2($article_id) {
+		$this->preview = true;
+		$this->view($article_id, '', false);
+	}
+
+	public function view($article_id, $title, $layout=true)
 	{
 		$this->inapp = @($_GET['inapp']==1);
 		$this->load->model("Article_model");
@@ -70,7 +75,7 @@ class Article extends MY_Controller {
 			$is_webview = true;
 		
 		$view_data = array(
-			'partial_view' => "view_article",
+			'partial_view' => $layout ? "view_article" : "view_article_test",
 			'category' => $category,
 			'featured_image' => ($this->inapp ? null : @$article['data']['article.featuredimage']['value']['main']['url']),
 			'featured_video' => ($this->inapp ? null : str_replace('.mp4', '.gif', @$article['data']['article.featuredvideo']['value'][0]['text'])),

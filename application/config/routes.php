@@ -45,6 +45,7 @@ $route['article/scratch_card/(:any)'] = 'article/frame/scratch_card/$1';
 
 $route['article/(:any)/(:any)'] = 'article/view/$1/$2';
 $route['preview/(:any)'] = 'article/preview/$1/$2';
+$route['preview2/(:any)'] = 'article/preview2/$1/$2';
 $route['(:any)/(:any)'] = 'article/view/$1/$2';
 $route['(:any)'] = '$1';
 

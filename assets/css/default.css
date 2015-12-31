@@ -175,8 +175,9 @@ buttons {
 .article-body section.twitter div.wrapper { margin: auto;/*display: inline-block; */ }
 
 /* slider component */
-
+.slider > div, .scratch_card > div { text-align: center; }
 .slider-before-img, .slider-after-img { width: 100%; }
+
 
 .cd-image-container {
   position: relative;
@@ -346,3 +347,4 @@ p.caption { margin: .5em 2em 2em !important; font-style: italic; font-size: 1em 
 	width: 100%; 
 	height: 100%; 
 }
+amp-instagram i-amp-sizer { padding-top: 100% !important; }

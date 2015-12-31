@@ -11,7 +11,7 @@
 </head>
 <body>
 	<?php if ($type == 'slider' && $slider) : ?>
-        <figure class="cd-image-container" data-height="<?=min($slider['beforeimg']['value']['main']['dimensions']['height'], $slider['afterimg']['value']['main']['dimensions']['height']);?>">
+        <figure class="cd-image-container" data-width="<?=min($slider['beforeimg']['value']['main']['dimensions']['width'], $slider['afterimg']['value']['main']['dimensions']['width']);?>" data-height="<?=min($slider['beforeimg']['value']['main']['dimensions']['height'], $slider['afterimg']['value']['main']['dimensions']['height']);?>">
             <img src="<?=$slider['beforeimg']['value']['main']['url'];?>" alt="" class="slider-after-img">
             <span class="cd-image-label" data-type="original"></span>
             <div class="cd-resize-img"><img src="<?=$slider['afterimg']['value']['main']['url'];?>" alt="" class="slider-before-img">
@@ -20,7 +20,7 @@
             <span class="cd-handle"></span>
         </figure>
 	<?php elseif ($type == 'scratch_card') : ?>
-	<figure data-height="<?=@$scratch_card['backimage']['value']['main']['dimensions']['height'];?>">
+	<figure data-height="<?=@$scratch_card['backimage']['value']['main']['dimensions']['height'];?>" data-width="<?=@$scratch_card['backimage']['value']['main']['dimensions']['width'];?>">
 	<div data-bimg="<?=@$scratch_card['backimage']['value']['main']['url'];?>" data-fimg="<?=$scratch_card['frontimg']['value']['main']['url'];?>" id="scratchpad-<?=$index;?>" class="scratchpad"></div>
 	</figure>
 	<style>
@@ -31,7 +31,10 @@
 	<script src="/assets/script/maxwise.js"></script>  
 	<script>
 		jQuery(document).ready(function($) {
-			$(parent.document.getElementById('<?=$type;?>-<?=(int)$index;?>')).find('iframe').height($('figure').attr('data-height'));
+			var height = parseInt($('figure').attr('data-height'))/parseInt($('figure').attr('data-width'))*$(document).width();
+		
+			$(parent.document.getElementById('<?=$type;?>-<?=(int)$index;?>')).find('iframe').height(height);
+//$('figure').attr('data-height'));
 		});
 	</script>
 </body>
