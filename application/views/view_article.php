@@ -1,12 +1,17 @@
+<style>
+html { background-color: initial; max-width: 100%; }
+body { overflow: initial; }
+.article-body { width: 100%; overflow-y: initial; }
+</style>
 <!-- PreLoader -->
 <div id="loader-wrapper">
   <div id="loader"></div>
   <div class="loader-section section-left"></div>
   <div class="loader-section section-right"></div>
 </div>
-<div id="content-wrapper2">
-  <div id="image-carousel" class="dragdealer">
-
+<div>
+  <div id="" class="">
+    <div class="">
       <div class="article-body">
 		<?php if(!$is_webview){?>
 			<?php if ($category) : ?>
@@ -35,8 +40,10 @@
           </div>
         </div>
       </div>
-
+	  
+    </div>
   </div>
+
   <!-- Main Nav Start -->
   <?php if(!$is_webview){?>
   <?php $this->load->view("view_main_menu");?>
@@ -47,7 +54,6 @@
 
 jQuery(function($) {
 	<?if(!$is_webview){?>
-	/*
 	if (typeof Dragdealer != "undefined") {
 	  new Dragdealer('image-carousel', {
 		steps: 3,
@@ -56,10 +62,8 @@ jQuery(function($) {
 		requestAnimationFrame: true
 	  });
 	}
-	*/
 	<?}?>
 	
-	/*
 	var $scroller = $(".article-body");
 	$scroller.bind('touchstart', function (ev) {
 	  var $this = $(this);
@@ -72,7 +76,6 @@ jQuery(function($) {
 	  var contentHeight = scrollHeight - offsetHeight;
 	  if (contentHeight == scrollTop) $this.scrollTop(scrollTop-1);
 	});
-	*/
 
 	<?php if($is_webview){?>
 		$('body').addClass('loaded');
