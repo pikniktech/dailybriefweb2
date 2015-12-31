@@ -6,7 +6,7 @@
 </div>
 <div id="content-wrapper2">
   <div id="image-carousel" class="dragdealer">
-    <div class="handle">
+
       <div class="article-body">
 		<?php if(!$is_webview){?>
 			<?php if ($category) : ?>
@@ -35,8 +35,7 @@
           </div>
         </div>
       </div>
-	  
-    </div>
+
   </div>
   <!-- Main Nav Start -->
   <?php if(!$is_webview){?>
@@ -48,6 +47,7 @@
 
 jQuery(function($) {
 	<?if(!$is_webview){?>
+	/*
 	if (typeof Dragdealer != "undefined") {
 	  new Dragdealer('image-carousel', {
 		steps: 3,
@@ -56,6 +56,7 @@ jQuery(function($) {
 		requestAnimationFrame: true
 	  });
 	}
+	*/
 	<?}?>
 	
 	/*
