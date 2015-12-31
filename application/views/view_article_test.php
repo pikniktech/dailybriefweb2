@@ -1,12 +1,17 @@
+<style>
+html { background-color: initial; max-width: 100%; }
+body { overflow: initial; }
+.article-body { width: 100%; overflow-y: initial; }
+</style>
 <!-- PreLoader -->
 <div id="loader-wrapper">
   <div id="loader"></div>
   <div class="loader-section section-left"></div>
   <div class="loader-section section-right"></div>
 </div>
-<div id="content-wrapper2">
-  <div id="image-carousel" class="dragdealer">
-    <div class="handle">
+<div>
+  <div id="" class="">
+    <div class="">
       <div class="article-body">
 		<?php if(!$is_webview){?>
 			<?php if ($category) : ?>
