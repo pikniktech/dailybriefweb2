@@ -41,5 +41,6 @@
   </head>
   <body>
 	<?$this->load->view($partial_view);?>
+<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
   </body>
 </html>
