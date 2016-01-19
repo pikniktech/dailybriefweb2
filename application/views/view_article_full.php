@@ -1,7 +1,7 @@
 <style>
 html { background-color: initial; max-width: 100%; }
-body { overflow: initial; }
-.article-body { width: 100%; overflow-y: initial; }
+body { overflow: initial; <?php if ($is_mobile || true) { ?>background: #000;<?php } ?> }
+.article-body { width: 100%; overflow-y: initial; background: #eee; }
 </style>
 <!-- PreLoader -->
 <div id="loader-wrapper">
@@ -11,7 +11,9 @@ body { overflow: initial; }
 </div>
 <div>
   <div id="" class="">
-    <div class="">
+    <div class="" style="<?php if (!$is_mobile) { ?>width: 600px; 
+    margin: 0 auto;
+    background: #ccc;<?php } ?>">
       <div class="article-body">
 		<?php if(!$is_webview){?>
 			<?php if ($category) : ?>
