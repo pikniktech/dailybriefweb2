@@ -4,7 +4,8 @@ class Article extends MY_Controller {
 
 	private $scratch_card_counter = 0,
 		$slider_counter = 0,
-		$preview = false;	
+		$preview = false,	
+		$is_webview = false;	
 
 	public function frame($type, $article_id) {
 		$index = (int)$this->input->get('index');
@@ -37,13 +38,14 @@ class Article extends MY_Controller {
 		}
 	}
 
-	public function preview($article_id) {
+	public function preview2($article_id) {
 		$this->preview = true;
 		$this->view($article_id, '');
 	}
 
-	public function preview2($article_id) {
+	public function preview($article_id, $title) {
 		$this->preview = true;
+		$this->is_webview = true;
 		$this->view($article_id, '', false);
 	}
 
@@ -73,16 +75,16 @@ class Article extends MY_Controller {
 		$is_webview = false;
 		if($title == "_webview_")
 			$is_webview = true;
-		
 		$view_data = array(
-			'partial_view' => $layout ? "view_article" : "view_article_test",
+			'partial_view' => $layout ? "view_article" : "view_article_full",
 			'category' => $category,
 			'featured_image' => ($this->inapp ? null : @$article['data']['article.featuredimage']['value']['main']['url']),
 			'featured_video' => ($this->inapp ? null : str_replace('.mp4', '.gif', @$article['data']['article.featuredvideo']['value'][0]['text'])),
 			'article' => $article,
 			'article_content' => $this->_render_content($article),
 			'pub_date' => @$article['data']['article.date']['value'] ? date('F d, Y h:ma', strtotime($article['data']['article.date']['value'])) : '',
-			'is_webview' => $is_webview,
+			'is_webview' => $this->is_webview ? $this->is_webview : $is_webview,
+			'is_mobile' => $this->agent->is_mobile(),
 		);
 
 		$this->load_view('view_master', $view_data);
