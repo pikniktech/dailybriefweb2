@@ -34,9 +34,9 @@ body { overflow: initial; }
 		<span class="article-info"><?php echo $pub_date;?></span>
 		<?=@$article_content; ?>
           <div class="article-tag">
-			<?php foreach ($article['tags'] as $tag) : ?>
+			<?php foreach ($article['tags'] as $tag){ ?>
 				<span><a href="/tags/<?=$tag;?>"><?=$tag;?></a></span>
-			<?php endforeach; ?>
+			<?php } ?>
           </div>
         </div>
       </div>
