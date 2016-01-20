@@ -13,22 +13,6 @@ body { overflow: initial; }
   <div id="" class="">
     <div class="">
       <div class="article-body">
-		<?php if(!$is_webview){?>
-			<?php if ($category) : ?>
-				<div class="section-block orange" style="background: <?=$category['topbar_color'];?>">
-				  <div><?=$category['name'];?></div>
-				</div>
-			<?php endif; ?>
-			<?php if ($featured_video || $featured_image) : ?>
-				<div class="article-visual">
-				<?php if ($featured_video) : ?>
-					<img u=image src="<?=$featured_video;?>" class="visual-image" />
-				<?php elseif ($featured_image) : ?>
-					<img u=image src="<?=$featured_image;?>" class="visual-image" />
-				<?php endif; ?>
-				</div>
-			<?php endif; ?>
-		<?php } ?>
         <div class="article-content">
 		<h2><?=@$article['data']['article.title']['value'][0]['text'];?></h2>
 		<span class="article-info"><?php echo $pub_date;?></span>
@@ -44,26 +28,11 @@ body { overflow: initial; }
     </div>
   </div>
 
-  <!-- Main Nav Start -->
-  <?php if(!$is_webview){?>
-  <?php $this->load->view("view_main_menu");?>
-  <?php } ?>
-  <!-- Main Nav End -->
 </div>
 <script>
 
 jQuery(function($) {
-	<?if(!$is_webview){?>
-	if (typeof Dragdealer != "undefined") {
-	  new Dragdealer('image-carousel', {
-		steps: 3,
-		speed: 0.3,
-		loose: true,
-		requestAnimationFrame: true
-	  });
-	}
-	<?}?>
-	
+
 	var $scroller = $(".article-body");
 	$scroller.bind('touchstart', function (ev) {
 	  var $this = $(this);
@@ -77,26 +46,10 @@ jQuery(function($) {
 	  if (contentHeight == scrollTop) $this.scrollTop(scrollTop-1);
 	});
 
-	<?php if($is_webview){?>
-		$('body').addClass('loaded');
-		$('.section-block').removeClass('hide');
-		$('.main-nav').addClass('hide');
-		$('.news-feed').addClass('hide');
-	<?}else{?>
-	  //PreLoading items, animations
-	  setTimeout(function(){
-		$('body').addClass('loaded');
-	  }, 2000);
-		
-	  //Show Section Block
-	  setTimeout(function(){
-		$('.section-block').removeClass('hide');
-	  }, 3000);
-	  setTimeout(function(){
-		$('.main-nav').addClass('hide');
-		$('.news-feed').addClass('hide');
-	  }, 1000);
-	<?}?>
+	$('body').addClass('loaded');
+	$('.section-block').removeClass('hide');
+	$('.main-nav').addClass('hide');
+	$('.news-feed').addClass('hide');
   
   var keys = {37: 1, 39: 1};
 
@@ -124,12 +77,7 @@ jQuery(function($) {
   }
 
   // Responsive Part
-  var $window = $(window).on('resize', function(){
-    var winHeight = $(window).height();
-    var winWidth = $('html').width();
-    $('#image-carousel').height(winHeight);
-    $('.article-visual').height(winHeight).width(winWidth);
-  }).trigger('resize');
+
 
 });
 </script>
