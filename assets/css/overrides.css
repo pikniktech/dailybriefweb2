@@ -161,6 +161,13 @@ body {
     margin-left: 0 !important;
 }
 /* Slider */
+#slider_container > div.section img,
+#slider_container > div.section iframe {
+  height:100%;
+  width:100%;
+}
+
+
 .jssora22l, .jssora22r {
     display: block;
     position: absolute;
@@ -169,7 +176,7 @@ body {
     overflow: hidden;
 }
 .jssora22l {display: none}
-.jssora22r {bottom:5px}
+/*.jssora22r {bottom:5px}*/
 .jssora22r i {
     color: white;
     font-size: 3em;
@@ -757,10 +764,9 @@ background-size: cover;
 
 .article-body {
     position: relative;
-    width: 33.33333%;
-    float:left;
+    width: 100%;
+	height: 100%;
     overflow-y: scroll;
-        height: 100%;
 }
 .article-visual {
     position: relative;
@@ -773,6 +779,7 @@ background-size: cover;
 .article-content {
     position: relative;
     padding: 3em 0;
+	width: 100%;
 }
 .article-content h2 {
   margin: 0 1em 0.5em 1em;

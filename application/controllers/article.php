@@ -46,7 +46,6 @@ class Article extends MY_Controller {
 
 	public function preview($article_id, $title) {
 		$this->preview = true;
-		$this->is_webview = true;
 		$this->view($article_id, '', false);
 	}
 

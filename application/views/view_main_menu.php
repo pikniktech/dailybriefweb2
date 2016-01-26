@@ -45,7 +45,9 @@
 	  <i class="fa fa-angle-up"></i>
 	</div>
   </div>
-
+  <div class="btn-home orange">
+    <i class="fa fa-home"></i>
+  </div>
 <script>
 jQuery(function($) {
 
@@ -81,6 +83,10 @@ jQuery(function($) {
   var btnMenuOutWidth = $('.btn-menu-out').width();
   var btnMenuOutMargin = ($('.main-nav').width() - btnMenuOutWidth) / 2;
   $('.btn-menu-out').css({"left":btnMenuOutMargin+"px"});
+
+  //DownArrow Hack (Experimental)
+  var overallH = $(window).height();
+  $('#slider1_container').height(overallH);
 
 	}).trigger('resize');
 
