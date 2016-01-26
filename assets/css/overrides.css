@@ -155,7 +155,7 @@ OVERRIDE
 }
 body {
   max-height:100%;
-  overflow: hidden;
+  overflow: auto; /* hidden;*/
 }
 #content-wrapper{
     margin-left: 0 !important;

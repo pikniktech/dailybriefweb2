@@ -1,5 +1,68 @@
+var carousels = [];
+var goToScreen = function(index, action) {
+	try {
+		var temp = carousels[index]
+		action == 'next' ? carousels[index].next() : carousels[index].previous()
+	} catch (ex) {
+		console.log(ex)
+	}
+}
 jQuery(document).ready(function($){
-    //check if the .cd-image-container is in the viewport 
+
+if ($('.fullscreen-scrolling').length > 0) { 
+$('.fullscreen-scrolling').each(function(index) {
+	var carousel = $('#'+$(this).attr('id')+' ul'); //$("#scrolling ul");
+
+	carousel.attr('data-rel', index)
+	if (carousel.length > 0 )
+		carousel.itemslide({
+			one_item: true,
+			parent_width: true
+		});
+
+	// put next or previous icon
+	if (carousel.length > 0) {
+		//console.log('height: ', carousel.height())
+		carousel.parent().append('<div class="arrows prev" style="color: #fff; position: absolute; top: 45%; z-index:1;"><a href="javascript: goToScreen('+index+', \'prev\')" class="arrow prev"><i class="fa fa-angle-left fa-4x"></i></a></div>')
+		carousel.parent().append('<div class="arrows next" style="color: #fff; position: absolute; top: 45%; z-index:1; right: 0;"><a href="javascript: goToScreen('+index+', \'next\')" class="arrow next"><i class="fa fa-angle-right fa-4x"></i></a></div>')
+	}
+	carousels.push(carousel)
+	carousel.on('changePos', function(e) {
+//		console.log('carousel-', $(this).attr('data-rel'))
+        	var temp = carousels[parseInt($(this).attr('data-rel'))]
+//		console.log("new pos: "+ temp.getCurrentPos());
+
+		var prev = temp.parent().find('.arrows.prev')
+		var next = temp.parent().find('.arrows.next')
+		if (temp.getActiveIndex() == 0)
+			prev.hide()
+		else
+			prev.show()
+		//console.log(temp.find('li').length)
+		if ((temp.getActiveIndex()+1) >= temp.find('li').length) 
+			next.hide() 
+		else 
+			next.show()
+	
+		if (temp.find('video').length > 0) {
+			temp.find('li.itemslide-active video')[0].play()
+		}
+	
+		delete(temp)
+	});
+
+	carousel.find('video').each(function() {
+		$(this)[0].addEventListener('loadeddata', function() {
+//			$(this).closest('section').height($(this).height())
+		}, false);
+	})
+	//console.log($(window).height())
+	carousel.parent().parent().height(carousel.height() > $(window).height() ? carousel.height() : $(window).height())
+})
+//$('.fullscreen-scrolling').parent().height(c.height())
+//$('.fullscreen-scrolling').parent().height(carousels[0].height())
+}
+   //check if the .cd-image-container is in the viewport 
     //if yes, animate it
     checkPosition($('.cd-image-container'));
     $(window).on('scroll', function(){
@@ -107,3 +170,4 @@ function updateLabel(label, resizeElement, position) {
 function onLoadFrame(frame) {
 //	alert(jQuery(frame).height());
 }
+

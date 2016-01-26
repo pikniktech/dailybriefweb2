@@ -76,6 +76,11 @@ class MY_Controller extends CI_Controller
 		//$view_data['error_list'] = $this->error_messages;
 		//$view_data['message_list'] = $this->system_messages;
 		$view_data['canonical'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+		$view_data['is_referral'] = $this->agent->is_referral();
+		$view_data['is_mobile'] = $this->agent->is_mobile();
+		$view_data['is_webview'] = $this->input->get('inapp') == 1 ? true : false;
+		$view_data['webview'] = $this->input->get('webview') == 1 ? true : false;
+//agent->is_mobile();
 
 		if($master_view_name == "")
 			$this->load->view($view_data['partial_view'], $view_data);

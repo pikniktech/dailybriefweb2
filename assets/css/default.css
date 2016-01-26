@@ -332,3 +332,58 @@ h3 { border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 20px 0;
 p.caption { margin: .5em 2em 2em !important; font-style: italic; font-size: 1em !important; color: #666; }
 
 amp-instagram i-amp-sizer { padding-top: 100% !important; }
+
+/* Add to docs */
+.clear { clear: both; }
+.fullscreen-scrolling {/*frame*/
+    overflow: hidden;
+}
+
+.fullscreen-scrolling ul {
+    /*Add if you want to disable the option of selecting the text while sliding*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    list-style-type: none;
+
+    -webkit-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.fullscreen-scrolling li {
+    float: left;
+	text-align: center;
+	background: #000;
+}
+
+.fullscreen-scrolling .itemslide-active
+{/*applied to current active item*/
+    -webkit-transform:  scale(1);
+    -ms-transform:  scale(1);
+    -moz-transform:  scale(1);
+    transform: scale(1);
+}
+
+/* .fullscreen-scrolling, .fullscreen-scrolling ul, .fullscreen-scrolling li { height: inherit; } */
+.fullscreen section { margin: 0; background: #000; position: relative; }
+
+.fullscreen .arrows a { color: #fff; }
+
+/*
+div.arrows { 
+	position: relative;
+	cursor: pointer;
+}
+a.arrow { 
+	color: #fff;
+	position: absolute;
+	top: 50%;
+}
+*/
+

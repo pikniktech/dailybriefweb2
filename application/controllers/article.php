@@ -5,7 +5,8 @@ class Article extends MY_Controller {
 	private $scratch_card_counter = 0,
 		$slider_counter = 0,
 		$preview = true,
-		$is_webview = false;	
+		$is_webview = false,
+		$fullscreen = false; // if there is any fullscreen element, remove the title and tags 	
 
 	public function frame($type, $article_id) {
 		$index = (int)$this->input->get('index');
@@ -73,8 +74,9 @@ class Article extends MY_Controller {
 		$category = $this->category_lookup($startup['categories'], @$article['data']['article.category']['value']);		
 
 		$is_webview = false;
-		if($title == "_webview_")
+		if($title == "_webview_" || $this->input->get('inapp') == 1)
 			$is_webview = true;
+		
 		$view_data = array(
 			'partial_view' => $layout ? "view_article" : "view_article_full",
 			'category' => $category,
@@ -85,6 +87,7 @@ class Article extends MY_Controller {
 			'pub_date' => @$article['data']['article.date']['value'] ? date('F d, Y h:ma', strtotime($article['data']['article.date']['value'])) : '',
 			'is_webview' => $this->is_webview ? $this->is_webview : $is_webview,
 			'is_mobile' => $this->agent->is_mobile(),
+			'fullscreen' => $this->fullscreen,
 		);
 
 		$this->load_view('view_master', $view_data);
@@ -93,7 +96,7 @@ class Article extends MY_Controller {
 	// render article content 
 	private function _render_content($article) {
 		$prev = $rendered_content = '';
-		foreach ($article['data']['article.content']['value'] as $block) :
+		foreach (@$article['data']['article.content']['value'] as $block) :
 			if ($prev == 'o-list-item' && !in_array($block['type'], array('o-list-item')))
 				$rendered_content .= '</ol>';
 			elseif ($prev == 'list-item' && !in_array($block['type'], array('list-item')))
@@ -144,6 +147,16 @@ class Article extends MY_Controller {
 			break;
 			case 'twitter_quote':
 				$_rendered_content .= $this->load->view('widgets/view_twitter_quote', $block, true);			
+			break;
+			case 'fullscreen_image_gallery':
+				$_rendered_content .= $this->load->view('widgets/view_image_gallery_fullscreen', array('gallery' => $article['data']['article.gallery']['value']), true);
+				if ($_rendered_content)
+					$this->fullscreen = true;
+			break;
+			case 'fullscreen_video_gallery':
+				$_rendered_content .= $this->load->view('widgets/view_video_gallery_fullscreen', array('gallery' => $article['data']['article.video_gallery']['value']), true);
+				if ($_rendered_content)
+					$this->fullscreen = true;
 			break;
 			case 'image_gallery':
 				$_rendered_content .= $this->load->view('widgets/view_image_gallery', array('gallery' => $article['data']['article.gallery']['value']), true);

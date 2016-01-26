@@ -1,0 +1,38 @@
+{
+	"iPhone6": {
+		"radius": 35,
+		"name": "iPhone6",	
+		"width": 375,
+		"height": 667,
+		"topmargin": 50,
+		"toppad": 65,
+		"rightsidepad": 10,
+		"bottompad": 80,
+		"leftsidepad": 10,
+		"device_color": "#000"
+	},
+	"iPhone6+": {
+		"radius": 35,
+		"name": "iPhone6+",	
+		"width": 414,
+		"height": 736,
+		"topmargin": 50,
+		"toppad": 65,
+		"rightsidepad": 10,
+		"bottompad": 80,
+		"leftsidepad": 10,
+		"device_color": "#000"
+	},
+	"SamsungEdge": {
+		"radius": 35,
+		"name": "Samsung Edge",	
+		"width": 360,
+		"height": 640,
+		"topmargin": 50,
+		"toppad": 30,
+		"rightsidepad": 1,
+		"bottompad": 50,
+		"leftsidepad": 1,
+		"device_color": "#C0C0C0"
+	}
+}

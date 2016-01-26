@@ -2,16 +2,21 @@
 html { background-color: initial; max-width: 100%; }
 body { overflow: initial; <?php if ($is_mobile || true) { ?>background: #000;<?php } ?> }
 .article-body { width: 100%; overflow-y: initial; background: #eee; }
+.btn-home { display: none !important; }
+<?php if ($fullscreen) : ?>
+.article-content { padding: 0 !important; }
+<?php endif;?>
 </style>
+<?php //$is_mobile = (@$_GET['test'] == 1) ? true : $is_mobile; ?>
 <!-- PreLoader -->
 <div id="loader-wrapper">
   <div id="loader"></div>
   <div class="loader-section section-left"></div>
   <div class="loader-section section-right"></div>
 </div>
-<div>
+<div <?=($fullscreen ? 'class="fullscreen"': '');?>>
   <div id="" class="">
-    <div class="" style="<?php if (!$is_mobile) { ?>width: 600px; 
+    <div class="" style="<?php if ($webview && !$is_mobile) { ?>width: 600px; 
     margin: 0 auto;
     background: #ccc;<?php } ?>">
       <div class="article-body">
@@ -32,14 +37,18 @@ body { overflow: initial; <?php if ($is_mobile || true) { ?>background: #000;<?p
 			<?php endif; ?>
 		<?php } ?>
         <div class="article-content">
+<?php if (!$fullscreen) : ?>
 		<h2><?=@$article['data']['article.title']['value'][0]['text'];?></h2>
 		<span class="article-info"><?php echo $pub_date;?></span>
+<?php endif; ?>
 		<?=@$article_content; ?>
-          <div class="article-tag">
+<?php if (!$fullscreen) : ?>          
+	<div class="article-tag">
 			<?php foreach ($article['tags'] as $tag) : ?>
 				<span><a href="/tags/<?=$tag;?>"><?=$tag;?></a></span>
 			<?php endforeach; ?>
           </div>
+<?php endif; ?>
         </div>
       </div>
 	  
@@ -50,7 +59,7 @@ body { overflow: initial; <?php if ($is_mobile || true) { ?>background: #000;<?p
   </div>
   <!-- Main Nav Start -->
   <?php if(!$is_webview){?>
-  <?php $this->load->view("view_main_menu");?>
+  <?php // $this->load->view("view_main_menu");?>
   <?php } ?>
   <!-- Main Nav End -->
 </div>

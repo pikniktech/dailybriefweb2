@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<?php if ($is_referral || $is_mobile) : ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	
+<?php endif; ?>	
 	<link rel="canonical" href="<?=$canonical;?>" >   
 
     <link href="/assets/css/mui.min.css" rel="stylesheet" type="text/css" />
@@ -13,9 +14,13 @@
     <link href="/assets/css/overrides.css" rel="stylesheet" type="text/css" />
     <script src="//cdn.muicss.com/mui-0.2.3/js/mui.min.js"></script>
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="/assets/script/jssor.slider.min.js"></script>
+<!--    <script src="/assets/script/jssor.slider.min.js"></script> -->
     <script src="/assets/script/jquery.nicescroll.js"></script>
+    <script src="/assets/script/jquery.rframe.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
+	
+	<script src="/assets/script/itemslide.min.js"></script>
+
 
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
     <script async custom-element="amp-image-lightbox" src="https://cdn.ampproject.org/v0/amp-image-lightbox-0.1.js"></script>
@@ -41,6 +46,19 @@
   </head>
   <body>
 	<?$this->load->view($partial_view);?>
+
 <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+<script>
+<?php if (!$is_referral && !$is_mobile && !$is_webview && !$webview) : ?>
+if (window.location.hash != 'rFrame') {
+	var options = {
+		device: 'iPhone6',
+		forkme: false,
+		toolbar: true // off the toolbar
+	}
+	$.rFrame(options);
+}
+<?php endif; ?>
+</script>
   </body>
 </html>
