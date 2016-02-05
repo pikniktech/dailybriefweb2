@@ -389,7 +389,9 @@ amp-instagram i-amp-sizer { padding-top: 100% !important; }
 /* .fullscreen-scrolling, .fullscreen-scrolling ul, .fullscreen-scrolling li { height: inherit; } */
 .fullscreen section { margin: 0; background: #000; position: relative; }
 
-.fullscreen .arrows a { color: #fff; }
+a.arrow.prev, a.arrow.next, .fullscreen .arrows a { color: #fff; }
+
+a.arrow i { padding: 0 10px; }
 
 /*
 div.arrows { 

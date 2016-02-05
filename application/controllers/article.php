@@ -76,11 +76,17 @@ class Article extends MY_Controller {
 		if($title == "_webview_" || $this->input->get('inapp') == 1)
 			$is_webview = true;
 		
+		// check whether video_on_cover is ON
+		$featured_video_gallery = '';
+		if (@$article['data']['article.video_on_cover']['value'] == 'yes') {
+			$featured_video_gallery = $this->load->view('widgets/view_video_gallery_fullscreen', array('gallery' => @$article['data']['article.video_gallery']['value']), true);
+		}
 		$view_data = array(
 			'partial_view' => $layout ? "view_article" : "view_article_full",
 			'category' => $category,
 			'featured_image' => ($this->inapp ? null : @$article['data']['article.featuredimage']['value']['main']['url']),
 			'featured_video' => ($this->inapp ? null : str_replace('.mp4', '.gif', @$article['data']['article.featuredvideo']['value'][0]['text'])),
+			'featured_video_gallery' => $featured_video_gallery,
 			'article' => $article,
 			'article_content' => $this->_render_content($article),
 			'pub_date' => @$article['data']['article.date']['value'] ? date('F d, Y h:ma', strtotime($article['data']['article.date']['value'])) : '',
@@ -125,11 +131,13 @@ class Article extends MY_Controller {
 		$headings = array();
 		for($i=1; $i<=6; $i++)
 			$headings[] = 'heading'.$i;
-		
+		$raw_text = strtolower($text);
 		if (in_array($t, $headings)) :
 			return str_replace('heading', 'h', $t);
 		elseif (in_array($t, array('o-list-item', 'list-item'))) :
 			return 'li';
+		elseif (strpos($raw_text,'<iframe') !== false) :
+			return '';
 		else:
 			return 'p';
 		endif;
@@ -177,7 +185,7 @@ class Article extends MY_Controller {
 			break;
 			default: 
 			$html_tag = $this->_tag($block['type'], $block['text']);
-			$_rendered_content .= '<'.$html_tag.'>'.$this->_spans($block).'</'.$html_tag.'>';
+			$_rendered_content .= $html_tag ?'<'.$html_tag.'>'.$this->_spans($block).'</'.$html_tag.'>' : $this->_spans($block);
 			
 		}
 		return $_rendered_content;
@@ -211,7 +219,7 @@ class Article extends MY_Controller {
 			endforeach;
 			return str_replace($replace, $placement, $text);
 		else:	
-			return preg_replace('/data-width="[0-9]+"/', 'data-width="100%"', $block['text']);
+			return preg_replace('/width="[0-9]+"/', 'width="100%"', preg_replace('/data-width="[0-9]+"/', 'data-width="100%"', $block['text']));
 			//return $block['text'];
 		endif;
 	}

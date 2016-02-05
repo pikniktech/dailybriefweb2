@@ -21,20 +21,26 @@ body { overflow: initial; <?php if ($is_mobile || true) { ?>background: #000;<?p
     background: #ccc;<?php } ?>">
       <div class="article-body">
 		<?php if(!$is_webview){?>
+<!--
 			<?php if ($category) : ?>
 				<div class="section-block orange" style="background: <?=$category['topbar_color'];?>">
 				  <div><?=$category['name'];?></div>
 				</div>
 			<?php endif; ?>
-			<?php if ($featured_video || $featured_image) : ?>
+-->
+			<?php if ($featured_video || $featured_image || $featured_video_gallery) : ?>
 				<div class="article-visual">
 				<?php if ($featured_video) : ?>
 					<img u=image src="<?=$featured_video;?>" class="visual-image" />
 				<?php elseif ($featured_image) : ?>
 					<img u=image src="<?=$featured_image;?>" class="visual-image" />
+				<?php elseif (@$featured_video_gallery) : ?>
+					<?=$featured_video_gallery;?>				
 				<?php endif; ?>
 				</div>
 			<?php endif; ?>
+		<?php } elseif (!empty($featured_video_gallery)) { ?>
+					<?=$featured_video_gallery;?>				
 		<?php } ?>
         <div class="article-content">
 <?php if (!$fullscreen) : ?>
