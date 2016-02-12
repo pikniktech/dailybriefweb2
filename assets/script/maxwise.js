@@ -9,6 +9,13 @@ var goToScreen = function(index, action) {
 }
 jQuery(document).ready(function($){
 
+if (typeof PlayBuzz !== "undefine") {
+	console.log("with playbuzz~~")
+//	$('body, html').style('overflow-x', 'initial', 'important');
+	$('body, html')[0].style.setProperty('overflow-x', 'initial', 'important');
+} 
+
+
 if ($('.fullscreen-scrolling').length > 0) { 
 
 	$('.fullscreen-scrolling').each(function(index) {

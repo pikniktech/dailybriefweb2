@@ -1,6 +1,6 @@
 <style>
 html { background-color: initial; max-width: 100%; }
-body { overflow: initial; <?php if ($is_mobile || true) { ?>background: #000;<?php } ?> }
+body { overflow: initial; overflow-x: initial !important;  <?php if ($is_mobile || true) { ?>background: #000;<?php } ?> }
 .article-body { width: 100%; overflow-y: initial; background: #eee; }
 .btn-home { display: none !important; }
 <?php if ($fullscreen) : ?>
