@@ -4,11 +4,11 @@ body { overflow: initial; }
 .article-body { width: 100%; overflow-y: initial; }
 </style>
 <!-- PreLoader -->
-<div id="loader-wrapper">
+<!--<div id="loader-wrapper">
   <div id="loader"></div>
   <div class="loader-section section-left"></div>
   <div class="loader-section section-right"></div>
-</div>
+</div>-->
 <div>
   <div id="" class="">
     <div class="">
@@ -24,7 +24,7 @@ body { overflow: initial; }
           </div>
         </div>
       </div>
-	  
+
     </div>
   </div>
 
@@ -46,11 +46,11 @@ jQuery(function($) {
 	  if (contentHeight == scrollTop) $this.scrollTop(scrollTop-1);
 	});
 
-	$('body').addClass('loaded');
+	//$('body').addClass('loaded');
 	$('.section-block').removeClass('hide');
 	$('.main-nav').addClass('hide');
 	$('.news-feed').addClass('hide');
-  
+
   var keys = {37: 1, 39: 1};
 
   function preventDefault(e) {

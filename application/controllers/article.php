@@ -4,7 +4,7 @@ class Article extends MY_Controller {
 
 	private $scratch_card_counter = 0,
 		$slider_counter = 0,
-		$preview = true,
+		$preview = false,
 		$is_webview = false,
 		$fullscreen = false; // if there is any fullscreen element, remove the title and tags 	
 
@@ -68,7 +68,7 @@ class Article extends MY_Controller {
 			show_404();
 			die();
 		}
-	
+
 		$article = (array)$article_result['results'][0];
 		$category = $this->category_lookup($startup['categories'], @$article['data']['article.category']['value']);		
 
