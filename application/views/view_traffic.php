@@ -1,9 +1,9 @@
 <!-- PreLoader -->
-<div id="loader-wrapper">
+<!--<div id="loader-wrapper">
   <div id="loader"></div>
   <div class="loader-section section-left"></div>
   <div class="loader-section section-right"></div>
-</div>
+</div>-->
 <div id="content-wrapper">
   <!-- Main content goes here -->
   <div class="section-traffic">
@@ -138,7 +138,7 @@ $('#message_input').on('focus', function () { window.scrollTo(0, 0) })
 $('.send-message').click(function() {
 	var msg = $("#message_input").val();
 	$("#message_input").val('');
-	
+
 	PUBNUB_traffic.publish({
 		channel: 'traffic',
 		message: {"text": msg}
@@ -231,18 +231,18 @@ jQuery(function($) {
 
 
   //PreLoading items, animations
-  setTimeout(function(){
+  /*setTimeout(function(){
 	$('body').addClass('loaded');
-  }, 2000);
+}, 2000);*/
 
   //Show Section Block
-  setTimeout(function(){
+  //setTimeout(function(){
 	$('.section-block').removeClass('hide');
-  }, 3000);
-  setTimeout(function(){
+  //}, 3000);
+  //setTimeout(function(){
 	$('.main-nav').addClass('hide');
 	$('.news-feed').addClass('hide');
-  }, 1000);
+  //}, 1000);
 
   //GoogleMap
   function initialize() {

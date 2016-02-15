@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <?php if ($is_referral || $is_mobile) : ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<?php endif; ?>	
-	<link rel="canonical" href="<?=$canonical;?>" >   
+<?php endif; ?>
+	<link rel="canonical" href="<?=$canonical;?>" >
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
 
@@ -15,7 +15,7 @@
     <link href="/assets/css/default.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/css/overrides.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/css/jquery.fullPage.css" rel="stylesheet" type="text/css" />
+    <!--<link href="/assets/css/jquery.fullPage.css" rel="stylesheet" type="text/css" />-->
     <script src="//cdn.muicss.com/mui-0.2.3/js/mui.min.js"></script>
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 <!--    <script src="/assets/script/jssor.slider.min.js"></script> -->
@@ -24,7 +24,7 @@
     <script src="/assets/script/jquery.fullPage.min.js"></script>
     <!-- <script src="/assets/script/jquery.slimscroll.min.js"></script> -->
     <script src="https://maps.googleapis.com/maps/api/js"></script>
-	
+
 	<script src="/assets/script/itemslide.min.js"></script>
 
 

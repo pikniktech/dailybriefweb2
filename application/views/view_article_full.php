@@ -9,14 +9,14 @@ body { overflow: initial; overflow-x: initial !important;  <?php if ($is_mobile 
 </style>
 <?php //$is_mobile = (@$_GET['test'] == 1) ? true : $is_mobile; ?>
 <!-- PreLoader -->
-<div id="loader-wrapper">
+<!--<div id="loader-wrapper">
   <div id="loader"></div>
   <div class="loader-section section-left"></div>
   <div class="loader-section section-right"></div>
-</div>
+</div>-->
 <div <?=($fullscreen ? 'class="fullscreen"': '');?>>
   <div id="" class="">
-    <div class="" style="<?php if ($webview && !$is_mobile) { ?>width: 600px; 
+    <div class="" style="<?php if ($webview && !$is_mobile) { ?>width: 600px;
     margin: 0 auto;
     background: #ccc;<?php } ?>">
       <div class="article-body">
@@ -80,7 +80,7 @@ jQuery(function($) {
 	  });
 	}
 	<?}?>
-	
+
 	var $scroller = $(".article-body");
 	$scroller.bind('touchstart', function (ev) {
 	  var $this = $(this);
@@ -95,26 +95,26 @@ jQuery(function($) {
 	});
 
 	<?php if($is_webview){?>
-		$('body').addClass('loaded');
+		//$('body').addClass('loaded');
 		$('.section-block').removeClass('hide');
 		$('.main-nav').addClass('hide');
 		$('.news-feed').addClass('hide');
 	<?}else{?>
 	  //PreLoading items, animations
-	  setTimeout(function(){
+	  //setTimeout(function(){
 		$('body').addClass('loaded');
-	  }, 2000);
-		
+	  //}, 2000);
+
 	  //Show Section Block
-	  setTimeout(function(){
+	  //setTimeout(function(){
 		$('.section-block').removeClass('hide');
-	  }, 3000);
-	  setTimeout(function(){
+	  //}, 3000);
+	//  setTimeout(function(){
 		$('.main-nav').addClass('hide');
 		$('.news-feed').addClass('hide');
-	  }, 1000);
+	  //}, 1000);
 	<?}?>
-  
+
   var keys = {37: 1, 39: 1};
 
   function preventDefault(e) {
