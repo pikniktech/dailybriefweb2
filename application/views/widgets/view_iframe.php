@@ -24,17 +24,21 @@
 	<div data-bimg="<?=@$scratch_card['backimage']['value']['main']['url'];?>" data-fimg="<?=$scratch_card['frontimg']['value']['main']['url'];?>" id="scratchpad-<?=$index;?>" class="scratchpad"></div>
 	</figure>
 	<style>
-		#scratchpad-<?=$index;?> {/* width: 100%; */ height: <?=$scratch_card['frontimg']['value']['main']['dimensions']['height'];?>px; }
+		#scratchpad-01-<?=$index;?> { height: <?=$scratch_card['frontimg']['value']['main']['dimensions']['height'];?>px; }
 	</style>
 	<script src="/assets/script/wScratchPad.min.js"></script>   
+	<script>
+		try { 
+			var height = parseInt($('figure').attr('data-height'))/parseInt($('figure').attr('data-width'))*$(document).width();
+			$('#scratchpad-<?=$index;?>').height(height)
+		} catch (ex) {}
+	</script>
 	<?php endif; ?>
 	<script src="/assets/script/maxwise.js"></script>  
 	<script>
 		jQuery(document).ready(function($) {
 			var height = parseInt($('figure').attr('data-height'))/parseInt($('figure').attr('data-width'))*$(document).width();
-		
-			$(parent.document.getElementById('<?=$type;?>-<?=(int)$index;?>')).find('iframe').height(height);
-//$('figure').attr('data-height'));
+			$(parent.document.getElementById('<?=$type;?>-<?=(int)$index;?>')).find('iframe').height(height).attr("height", height+'px');
 		});
 	</script>
 </body>
