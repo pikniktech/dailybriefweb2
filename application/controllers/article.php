@@ -4,7 +4,7 @@ class Article extends MY_Controller {
 
 	private $scratch_card_counter = 0,
 		$slider_counter = 0,
-		$preview = true,
+		$preview = false,
 		$is_webview = false,
 		$fullscreen = false; // if there is any fullscreen element, remove the title and tags 	
 
