@@ -21,8 +21,9 @@ if ($('.fullscreen-scrolling').length > 0) {
 	$('.fullscreen-scrolling').each(function(index) {
 		var that = this	
 		$(that).fullpage({
-			verticalCentered: true,
+			//verticalCentered: true,
 			//scrollOverflow: true,
+			fitToSection: false,
 			autoScrolling: false,
 			afterRender: function(){
 				//playing the video

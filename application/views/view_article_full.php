@@ -31,7 +31,12 @@ body { overflow: initial; overflow-x: initial !important;  <?php if ($is_mobile 
 				</div>
 			<?php endif; ?>
 		<?php } ?> 
-
+<?php /*
+<iframe class="fullscreen" src="/iframe.html" width="100%" border="0" height="auto" style="border: none; " ></iframe>
+<script>
+$('.fullscreen').height($(window).height())
+</script>
+*/ ?>
 <?php if (!empty($featured_video_gallery)) { ?>        
 	<div class="fullscreen-scrolling">
 		<?=@$featured_video_gallery;?>
