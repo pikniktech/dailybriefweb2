@@ -4,14 +4,17 @@ class Article extends MY_Controller {
 
 	private $scratch_card_counter = 0,
 		$slider_counter = 0,
-		$preview = false,
+		$preview = true,
 		$is_webview = false,
 		$fullscreen = false; // if there is any fullscreen element, remove the title and tags 	
 
 	public function frame($type, $article_id) {
 		$index = (int)$this->input->get('index');
 		$this->load->model("Article_model");
-		
+	
+		if ($this->input->get('preview') == 1)
+			$this->preview = true;
+	
 		$article_result = $this->Article_model->get_detail($article_id, true, $this->preview);
 
 		if((!$this->preview && count($article_result['results']) == 0) || ($this->preview && empty($article_result)))
@@ -177,7 +180,7 @@ class Article extends MY_Controller {
 			case 'slider':
 				$slider = $article['data']['article.sliders']['value'][$this->slider_counter];
 				if ($slider)
-					$_rendered_content .= $this->load->view('widgets/view_slider', array('index' => $this->slider_counter, 'slider' => $slider, 'article_id' => $article['id']), true);	
+					$_rendered_content .= $this->load->view('widgets/view_slider', array('index' => $this->slider_counter, 'slider' => $slider, 'article_id' => $article['id'], 'preview' => $this->preview), true);	
 				$this->slider_counter++;
 			break;
 			case 'caption':

@@ -1,6 +1,6 @@
 <style>
 html { background-color: initial; max-width: 100%; }
-body { overflow: initial; <?php if ($is_mobile || true) { ?>background: #000;<?php } ?> }
+body { overflow: initial; overflow-x: initial !important;  <?php if ($is_mobile || true) { ?>background: #000;<?php } ?> }
 .article-body { width: 100%; overflow-y: initial; background: #eee; }
 .btn-home { display: none !important; }
 <?php if ($fullscreen) : ?>
@@ -21,43 +21,46 @@ body { overflow: initial; <?php if ($is_mobile || true) { ?>background: #000;<?p
     background: #ccc;<?php } ?>">
       <div class="article-body">
 		<?php if(!$is_webview){?>
-<!--
-			<?php if ($category) : ?>
-				<div class="section-block orange" style="background: <?=$category['topbar_color'];?>">
-				  <div><?=$category['name'];?></div>
-				</div>
-			<?php endif; ?>
--->
-			<?php if ($featured_video || $featured_image || $featured_video_gallery) : ?>
+			<?php if ($featured_video || $featured_image) : ?>
 				<div class="article-visual">
 				<?php if ($featured_video) : ?>
 					<img u=image src="<?=$featured_video;?>" class="visual-image" />
 				<?php elseif ($featured_image) : ?>
 					<img u=image src="<?=$featured_image;?>" class="visual-image" />
-				<?php elseif (@$featured_video_gallery) : ?>
-					<?=$featured_video_gallery;?>
 				<?php endif; ?>
 				</div>
 			<?php endif; ?>
-		<?php } elseif (!empty($featured_video_gallery)) { ?>
-					<?=$featured_video_gallery;?>
-		<?php } ?>
-        <div class="article-content">
-<?php if (!$fullscreen) : ?>
+		<?php } ?> 
+<?php /*
+<iframe class="fullscreen" src="/iframe.html" width="100%" border="0" height="auto" style="border: none; " ></iframe>
+<script>
+$('.fullscreen').height($(window).height())
+</script>
+*/ ?>
+<?php if (!empty($featured_video_gallery)) { ?>        
+	<div class="fullscreen-scrolling">
+		<?=@$featured_video_gallery;?>
+<?php } ?>
+	<div class="article-content section">	
+	<?php if (!$fullscreen) : ?>
 		<h2><?=@$article['data']['article.title']['value'][0]['text'];?></h2>
 		<span class="article-info"><?php echo $pub_date;?></span>
-<?php endif; ?>
+	<?php endif; ?>
 		<?=@$article_content; ?>
-<?php if (!$fullscreen) : ?>
-	<div class="article-tag">
-			<?php foreach ($article['tags'] as $tag) : ?>
-				<span><a href="/tags/<?=$tag;?>"><?=$tag;?></a></span>
-			<?php endforeach; ?>
-          </div>
-<?php endif; ?>
+	<?php if (!$fullscreen) : ?>          
+		<div class="article-tag">
+		<?php foreach ($article['tags'] as $tag) : ?>
+			<span><a href="/tags/<?=$tag;?>"><?=$tag;?></a></span>
+		<?php endforeach; ?>
+        	</div>
+	<?php endif; ?>
         </div>
-      </div>
 
+<?php if (!empty($featured_video_gallery)) { ?>        
+	</div> <!-- full screen end -->
+<?php }?>
+
+      </div>	  
     </div>
   </div>
   <div class="btn-home orange">

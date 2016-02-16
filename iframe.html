@@ -1,0 +1,91 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="http://website-dev-1642778968.ap-northeast-1.elb.amazonaws.com/preview/VnsWliEAAD2-4Sya?webview=undefined" >
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+
+<link href="/assets/css/mui.min.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/default.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/css/overrides.css" rel="stylesheet" type="text/css" />
+<script src="//cdn.muicss.com/mui-0.2.3/js/mui.min.js"></script>
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="/assets/script/jquery.nicescroll.js"></script>
+<script src="/assets/script/jquery.rframe.js"></script>
+<script src="/assets/script/jquery.fullPage.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+
+
+<script src="/assets/script/common.js"></script>
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script src="/assets/script/wScratchPad.min.js"></script>
+<script src="/assets/script/maxwise.js"></script>
+<title>DailyBrief</title>
+</head>
+<body>
+<style>
+html { background-color: initial; max-width: 100%; }
+body { overflow: initial; overflow-x: initial !important;  background: #000; }
+.article-body { width: 100%; overflow-y: initial; background: #eee; }
+.btn-home { display: none !important; }
+</style>
+<div class="fullscreen-scrolling2">
+<div class="section" style="background: #000; width: 100%; height: inherit;">
+<video class="fullscreen-video"  width="auto" height="auto" style="height: inherit; min-width: 320px; overflow: hidden; width: inherit;" controls webkit-playsinline loop >
+<source src="https://res.cloudinary.com/dj2vpno2y/video/upload/c_scale,w_320/v1453796647/Snacks_01_frf0qc.mp4" type="video/mp4">
+</video>
+</div>
+<div class="section" style="background: #000; width: 100%; height: inherit;">
+<video class="fullscreen-video"  width="auto" height="auto" style="height: inherit; min-width: 320px; overflow: hidden; width: inherit;" controls webkit-playsinline loop >
+<source src="https://res.cloudinary.com/dj2vpno2y/video/upload/c_scale,w_320/v1453796793/Snacks_02_nremfd.mp4" type="video/mp4">
+</video>
+</div>
+<div class="section" style="background: #000; width: 100%; height: inherit;">
+<video class="fullscreen-video"  width="auto" height="auto" style="height: inherit; min-width: 320px; overflow: hidden; width: inherit;" controls webkit-playsinline loop >
+<source src="http://res.cloudinary.com/dj2vpno2y/video/upload/c_scale,w_320/v1453796825/Snacks_03_ibvjao.mp4" type="video/mp4">
+</video>
+</div>
+<div class="section" style="background: #000; width: 100%; height: inherit;">
+<video class="fullscreen-video"  width="auto" height="auto" style="height: inherit; min-width: 320px; overflow: hidden; width: inherit;" controls webkit-playsinline loop >
+<source src="https://res.cloudinary.com/dj2vpno2y/video/upload/v1453796852/Snacks_04_yscei6.mp4" type="video/mp4">
+</video>
+</div>
+</div>
+<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+<script>
+	$('.fullscreen-scrolling2').each(function(index) {
+		var that = this	
+		$(that).fullpage({
+			//verticalCentered: true,
+			//scrollOverflow: true,
+			autoScrolling: true,
+			afterRender: function(){
+				//playing the video
+				$(that).find('video').get(0).play();
+			},
+			onLeave (index, nextIndex, direction) {
+				if ($(that).find('video').length >= nextIndex) 
+					$(that).find('video').get(nextIndex-1).play();
+			},
+			afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){
+				$(that).find('video').get(slideIndex).play();
+				console.log(slideIndex)
+			},
+			onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
+				console.log(slideIndex)
+			}
+		})
+	})
+</script>
+</body>
+</html>
+

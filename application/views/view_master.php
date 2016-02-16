@@ -21,9 +21,8 @@
 <!--    <script src="/assets/script/jssor.slider.min.js"></script> -->
     <script src="/assets/script/jquery.nicescroll.js"></script>
     <script src="/assets/script/jquery.rframe.js"></script>
-<!--
     <script src="/assets/script/jquery.fullPage.min.js"></script>
--->
+    <!-- <script src="/assets/script/jquery.slimscroll.min.js"></script> -->
     <script src="https://maps.googleapis.com/maps/api/js"></script>
 
 	<script src="/assets/script/itemslide.min.js"></script>
