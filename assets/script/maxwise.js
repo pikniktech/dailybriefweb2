@@ -20,11 +20,12 @@ if ($('.fullscreen-scrolling').length > 0) {
 
 	$('.fullscreen-scrolling').each(function(index) {
 		var that = this	
+	//	$.fn.fullpage.setAllowScrolling(false, 'left, right');
 		$(that).fullpage({
 			//verticalCentered: true,
 			//scrollOverflow: true,
 			fitToSection: false,
-			autoScrolling: false,
+			autoScrolling: true,
 			afterRender: function(){
 				//playing the video
 				$(that).find('video').get(0).play();
