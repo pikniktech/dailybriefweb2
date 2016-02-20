@@ -393,6 +393,9 @@ a.arrow.prev, a.arrow.next, .fullscreen .arrows a { color: #fff; }
 
 a.arrow i { padding: 0 10px; }
 
+.article-content.fp-section { height: auto !important; }
+.article-content.fp-section .fp-tableCell { height: inherit !important; }
+.fp-tableCell { text-align: center; }
 /*
 div.arrows { 
 	position: relative;

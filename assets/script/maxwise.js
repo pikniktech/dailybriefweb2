@@ -9,7 +9,41 @@ var goToScreen = function(index, action) {
 }
 jQuery(document).ready(function($){
 
+if (typeof PlayBuzz !== "undefine") {
+//	console.log("with playbuzz~~")
+//	$('body, html').style('overflow-x', 'initial', 'important');
+	$('body, html')[0].style.setProperty('overflow-x', 'initial', 'important');
+} 
+
+
 if ($('.fullscreen-scrolling').length > 0) { 
+
+	$('.fullscreen-scrolling').each(function(index) {
+		var that = this	
+	//	$.fn.fullpage.setAllowScrolling(false, 'left, right');
+		$(that).fullpage({
+			//verticalCentered: true,
+			//scrollOverflow: true,
+			fitToSection: false,
+			autoScrolling: true,
+			afterRender: function(){
+				//playing the video
+				$(that).find('video').get(0).play();
+			},
+			onLeave (index, nextIndex, direction) {
+				if ($(that).find('video').length >= nextIndex) 
+					$(that).find('video').get(nextIndex-1).play();
+			},
+			afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){
+				$(that).find('video').get(slideIndex).play();
+				console.log(slideIndex)
+			},
+			onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
+				console.log(slideIndex)
+			}
+		})
+	})
+/*
 $('.fullscreen-scrolling').each(function(index) {
 	var carousel = $('#'+$(this).attr('id')+' ul'); //$("#scrolling ul");
 
@@ -61,6 +95,7 @@ $('.fullscreen-scrolling').each(function(index) {
 })
 //$('.fullscreen-scrolling').parent().height(c.height())
 //$('.fullscreen-scrolling').parent().height(carousels[0].height())
+*/
 }
    //check if the .cd-image-container is in the viewport 
     //if yes, animate it
@@ -124,6 +159,9 @@ function drags(dragElement, resizeElement, container, labelContainer, labelResiz
             containerWidth = container.outerWidth(),
             minLeft = containerOffset + 10,
             maxLeft = containerOffset + containerWidth - dragWidth - 10;
+            
+		minLeft = containerOffset - dragWidth/2
+            	maxLeft = containerOffset + containerWidth - dragWidth/2
         
         dragElement.parents().on("mousemove vmousemove", function(e) {
             leftValue = e.pageX + xPosition - dragWidth;
@@ -135,8 +173,13 @@ function drags(dragElement, resizeElement, container, labelContainer, labelResiz
                 leftValue = maxLeft;
             }
 
-            widthValue = (leftValue + dragWidth/2 - containerOffset)*100/containerWidth+'%';
-            
+            widthValue = (leftValue + dragWidth/2 - containerOffset)*100/containerWidth;
+		console.log(widthValue)
+		//if (widthValue > 90)
+			
+	
+		widthValue += '%';           
+ 
             $('.draggable').css('left', widthValue).on("mouseup vmouseup", function() {
                 $(this).removeClass('draggable');
                 resizeElement.removeClass('resizable');
