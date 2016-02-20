@@ -73,7 +73,7 @@ class Article extends MY_Controller {
 		$category = $this->category_lookup($startup['categories'], @$article['data']['article.category']['value']);		
 
 		$is_webview = false;
-		if($title == "_webview_" || $this->input->get('inapp') == 1)
+		if(substr($title, 0, 9)  == "_webview_" || $this->input->get('inapp') == 1)
 			$is_webview = true;
 		
 		// check whether video_on_cover is ON
@@ -81,6 +81,7 @@ class Article extends MY_Controller {
 		if (@$article['data']['article.video_on_cover']['value'] == 'yes') {
 			$featured_video_gallery = $this->load->view('widgets/view_video_gallery_fullscreen', array('gallery' => @$article['data']['article.video_gallery']['value']), true);
 		}
+		
 		$view_data = array(
 			'partial_view' => $layout ? "view_article" : "view_article_full",
 			'category' => $category,
