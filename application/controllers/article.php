@@ -86,7 +86,7 @@ class Article extends MY_Controller {
 		}
 		
 		$view_data = array(
-			'partial_view' => $layout ? "view_article" : "view_article_full",
+			'partial_view' => "view_article_full", //$layout ? "view_article" : "view_article_full",
 			'category' => $category,
 			'featured_image' => ($this->inapp ? null : @$article['data']['article.featuredimage']['value']['main']['url']),
 			'featured_video' => ($this->inapp ? null : str_replace('.mp4', '.gif', @$article['data']['article.featuredvideo']['value'][0]['text'])),
