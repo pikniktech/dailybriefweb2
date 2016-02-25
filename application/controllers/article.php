@@ -81,7 +81,7 @@ class Article extends MY_Controller {
 		
 		// check whether video_on_cover is ON
 		$featured_video_gallery = '';
-		if (@$article['data']['article.video_on_cover']['value'] == 'yes') {
+		if (@$article['data']['article.video_on_cover']['value'] == 'yes' && !$this->inapp) {
 			$featured_video_gallery = $this->load->view('widgets/view_video_gallery_fullscreen', array('gallery' => @$article['data']['article.video_gallery']['value']), true);
 		}
 		
@@ -166,7 +166,7 @@ class Article extends MY_Controller {
 			break;
 			case 'fullscreen_video_gallery':
 				$_rendered_content .= $this->load->view('widgets/view_video_gallery_fullscreen', array('gallery' => $article['data']['article.video_gallery']['value']), true);
-				if ($_rendered_content)
+				if ($_rendered_content && $article['data']['article.video_on_cover']['value'] == 'yes')
 					$this->fullscreen = true;
 			break;
 			case 'image_gallery':
