@@ -1,11 +1,11 @@
-<html>
+<html style="overflow-x: hidden !important;">
 <head>
 	<title><?=@htmlentities($article['data']['article.title']['value'][0]['text']);?></title>
 	<link href="/assets/css/default.css" rel="stylesheet" type="text/css" />	
 	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src="/assets/script/jquery.mobile.custom.min.js"></script>
 	<style>
-		html, body { margin: 0; padding: 0;}
+		html, body { margin: 0; padding: 0; overflow-x: hidden !important; }
 		figure { margin: 0; }
 	</style>
 </head>
