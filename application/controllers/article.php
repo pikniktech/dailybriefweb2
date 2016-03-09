@@ -175,7 +175,7 @@ class Article extends MY_Controller {
 			case 'scratch_card':
 				$scratch_card = $article['data']['article.scratchcards']['value'][$this->scratch_card_counter];
 				if ($scratch_card)
-					$_rendered_content .= $this->load->view('widgets/view_scratch_card', array('index' => $this->scratch_card_counter, 'scratch_card' => $scratch_card, 'article_id' => $article['id']), true);	
+					$_rendered_content .= $this->load->view('widgets/view_scratch_card', array('index' => $this->scratch_card_counter, 'scratch_card' => $scratch_card, 'article_id' => $article['id'], 'preview' => $this->preview), true);	
 				$this->scratch_card_counter++;
 			break;
 			case 'slider':
