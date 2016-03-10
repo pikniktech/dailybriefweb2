@@ -153,6 +153,12 @@ class Article extends MY_Controller {
 	private function _render_para($block, $article) {
 		$_rendered_content = '';
 		switch (@$block['label']) {
+			case 'image': 
+				$_rendered_content .= $this->load->view('widgets/view_ext_image', $block, true);			
+			break;
+			case 'video':
+				$_rendered_content .= $this->load->view('widgets/view_ext_video', $block, true);			
+			break;
 			case 'instagram_quote':
 				$_rendered_content .= $this->load->view('widgets/view_instagram_quote', $block, true);			
 			break;

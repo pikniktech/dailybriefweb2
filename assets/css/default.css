@@ -398,6 +398,11 @@ a.arrow i { padding: 0 10px; }
 .article-content.fp-section { height: auto !important; }
 .article-content.fp-section .fp-tableCell { height: inherit !important; }
 .fp-tableCell { text-align: center; }
+
+section.image img { width: 100%; } 
+
+section.video video { width: 100%; } 
+
 /*
 div.arrows { 
 	position: relative;
