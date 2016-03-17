@@ -30,6 +30,8 @@ $config['pubnub_subscribe_key'] = 'sub-c-c6921f0a-a492-11e5-9937-02ee2ddab7fe';
 
 $config['preview_api_server'] = 'http://preview-web-729052429.ap-southeast-1.elb.amazonaws.com/api/';
 
+$config['fb_app_id'] = "1700308893572314";
+
 $config['redis'] = array(
 	"scheme" => "tcp",
 	"host" => "localhost", // dev redist endpoint "dev-cache.2m2of6.0001.apne1.cache.amazonaws.com",

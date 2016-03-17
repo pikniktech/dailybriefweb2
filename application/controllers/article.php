@@ -234,4 +234,12 @@ class Article extends MY_Controller {
 		endif;
 	}
 	
+	public function comment($article_id) {
+		
+		$data = array(
+			'article_id' => $article_id
+		);
+		$this->load->view('view_comment', $data);
+	}
+	
 }

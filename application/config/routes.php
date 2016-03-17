@@ -42,6 +42,7 @@ $route['default_controller'] = "home";
 $route['404_override'] = '';
 $route['article/slider/(:any)'] = 'article/frame/slider/$1';
 $route['article/scratch_card/(:any)'] = 'article/frame/scratch_card/$1';
+$route['article/comment/(:any)'] = 'article/comment/$1';
 
 $route['article/(:any)/(:any)'] = 'article/view/$1/$2';
 $route['preview/(:any)'] = 'article/preview/$1/$2';
